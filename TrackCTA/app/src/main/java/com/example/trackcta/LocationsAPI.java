@@ -50,7 +50,5 @@ public class LocationsAPI
             }
         };
         queue.add(new JsonObjectRequest(Request.Method.GET, URL, null, listener, error));
-
-
     }
 }

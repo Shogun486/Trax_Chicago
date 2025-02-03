@@ -13,15 +13,16 @@ import org.json.JSONObject;
 
 public class StopsAPI
 {
-    private static final String STOPS_URL = "https://data.cityofchicago.org/resource/8pix-ypme.json";
-    private static RequestQueue queue;
-    private static MainActivity mainActivity;
-    private static String [] stops;
+    private final String STOPS_URL = "https://data.cityofchicago.org/resource/8pix-ypme.json";
+    private RequestQueue queue;
+    private MainActivity mainActivity;
+    private String [] stops;
 
-    public static void call(MainActivity mainActivity)
+
+    public void call(MainActivity mainActivity)
     {
-        StopsAPI.mainActivity = mainActivity;
-        queue = Volley.newRequestQueue(StopsAPI.mainActivity);
+        this.mainActivity = mainActivity;
+        queue = Volley.newRequestQueue(this.mainActivity);
 
         Response.Listener <JSONArray> listener = new Response.Listener<JSONArray>()
         {
@@ -38,10 +39,11 @@ public class StopsAPI
                         JSONObject info = arr.getJSONObject(i);
                         String stop_name = info.getString("stop_name");
                         Log.d("stop_name", stop_name);
-
                         stops[i] = stop_name;
                     }
-                    Log.d("Length", String.valueOf(stops.length));
+                    Log.d("LENGTH", String.valueOf(stops.length));
+                    MainActivity.updateStops(stops);
+
 
                 } catch (JSONException e)
                 {
@@ -54,12 +56,9 @@ public class StopsAPI
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                Log.d("an error occurred", error.toString());
+                Log.d("ERROR:", error.toString());
             }
         };
         queue.add(new JsonArrayRequest(Request.Method.GET, STOPS_URL, null, listener, error));
     }
-
-    public static String [] getStops() { return stops; }
-
 }
