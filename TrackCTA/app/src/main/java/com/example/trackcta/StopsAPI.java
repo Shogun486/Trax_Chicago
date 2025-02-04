@@ -10,13 +10,20 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.Map;
+import java.util.HashMap;
 
+
+/*
+
+    FETCHES STATION DATA: stop names, 'L' color, lat/long, etc.
+*/
 public class StopsAPI
 {
     private final String STOPS_URL = "https://data.cityofchicago.org/resource/8pix-ypme.json";
     private RequestQueue queue;
     private MainActivity mainActivity;
-    private String [] stops;
+    public static Map <String, String> line = new HashMap<>();
 
 
     public void call(MainActivity mainActivity)
@@ -33,19 +40,52 @@ public class StopsAPI
                 {
                     JSONArray arr = new JSONArray(response.toString());
                     int len = arr.length();
-                    stops = new String[len];
                     for(int i = 0; i < len; i++)
                     {
                         JSONObject info = arr.getJSONObject(i);
-                        String stop_name = info.getString("stop_name");
-                        Log.d("stop_name", stop_name);
-                        stops[i] = stop_name;
+                        String stationName = info.getString("station_name");
+                        String color = "unknown";
+                        if(!line.containsKey(stationName))
+                        {
+                            if(info.getBoolean("red") == true)
+                            {
+                                color = "red";
+                            }
+                            else if(info.getBoolean("blue") == true)
+                            {
+                                color = "blue";
+                            }
+                            else if(info.getBoolean("g") == true)
+                            {
+                                color = "green";
+                            }
+                            else if(info.getBoolean("brn") == true)
+                            {
+                                color = "brown";
+                            }
+                            else if(info.getBoolean("p") == true)
+                            {
+                                color = "purple";
+                            }
+                            else if(info.getBoolean("y") == true)
+                            {
+                                color = "yellow";
+                            }
+                            else if(info.getBoolean("pnk") == true)
+                            {
+                                color = "pink";
+                            }
+                            else if(info.getBoolean("o") == true)
+                            {
+                                color = "orange";
+                            }
+                            line.put(stationName, color);
+                        }
                     }
-                    Log.d("LENGTH", String.valueOf(stops.length));
-                    MainActivity.updateStops(stops);
-
-
-                } catch (JSONException e)
+                    MainActivity.updateStops();
+                    Log.d("URL", STOPS_URL);
+                }
+                catch (JSONException e)
                 {
                     throw new RuntimeException(e);
                 }
