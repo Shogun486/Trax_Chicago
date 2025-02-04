@@ -11,7 +11,11 @@ import android.widget.TextView;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 
@@ -89,7 +93,21 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Log.d("Clicked", String.valueOf(position));
+                //Log.d("Clicked", String.valueOf(position));
+                String stationName =((TextView)view).getText().toString();
+                //Log.d("stationName", stationName);
+
+                List<String> stops = new ArrayList<>();
+                for(String stopName: StopsAPI.stationInfo.get(stationName))
+                {
+                    //Log.d("stopName", s);
+                    stops.add(stopName);
+                }
+
+                adapter.clear();
+                adapter.addAll(stops);
+                listView.deferNotifyDataSetChanged();
+
             }
         });
 

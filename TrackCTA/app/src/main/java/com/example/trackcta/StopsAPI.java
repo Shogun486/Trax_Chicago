@@ -10,12 +10,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
 
 /*
-
     FETCHES STATION DATA: stop names, 'L' color, lat/long, etc.
 */
 public class StopsAPI
@@ -24,6 +26,7 @@ public class StopsAPI
     private RequestQueue queue;
     private MainActivity mainActivity;
     public static Map <String, String> line = new HashMap<>();
+    public static Map <String, List<String>> stationInfo = new HashMap<>();
 
 
     public void call(MainActivity mainActivity)
@@ -44,6 +47,11 @@ public class StopsAPI
                     {
                         JSONObject info = arr.getJSONObject(i);
                         String stationName = info.getString("station_name");
+                        String stopName = info.getString("stop_name");
+                        if(!stationInfo.containsKey(stationName))
+                            stationInfo.put(stationName, new ArrayList<>());
+                        stationInfo.get(stationName).add(stopName);
+
                         String color = "unknown";
                         if(!line.containsKey(stationName))
                         {
@@ -84,6 +92,8 @@ public class StopsAPI
                     }
                     MainActivity.updateStops();
                     Log.d("URL", STOPS_URL);
+                    Log.d("stationInfo", stationInfo.toString());
+
                 }
                 catch (JSONException e)
                 {
