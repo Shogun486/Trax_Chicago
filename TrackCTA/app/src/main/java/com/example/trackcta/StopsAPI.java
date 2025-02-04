@@ -29,10 +29,13 @@ public class StopsAPI
     public static Map <String, List<String>> stationInfo = new HashMap<>();
 
 
+
     public void call(MainActivity mainActivity)
     {
+        stationInfo.clear();
         this.mainActivity = mainActivity;
         queue = Volley.newRequestQueue(this.mainActivity);
+
 
         Response.Listener <JSONArray> listener = new Response.Listener<JSONArray>()
         {

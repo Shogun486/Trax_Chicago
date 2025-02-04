@@ -52,7 +52,7 @@ public class LocationsAPI
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                Log.d("an error occurred", error.toString());
+                Log.d("ERROR", error.toString());
             }
         };
         queue.add(new JsonObjectRequest(Request.Method.GET, URL, null, listener, error));
