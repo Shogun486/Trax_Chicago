@@ -7,29 +7,32 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /*
 
-    TO-IMPLEMENT
+    Fetches train arrival times for a unique stop_id
 
 */
 
-public class LocationsAPI
+public class ArrivalsAPI
 {
     private static final String API_KEY = "a64c36c7f3174612a48134c15b3568a5",
-            PRE_KEY_URL = "http://lapi.transitchicago.com/api/1.0/ttpositions.aspx?key=",
-            POST_KEY_URL = "&rt=red&outputType=JSON";
-    private static String URL = PRE_KEY_URL + API_KEY + POST_KEY_URL;
+            PRE_KEY_URL = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=",
+            POST_KEY_URL1 = "&stpid=",
+            POST_KEY_URL2 = "&outputType=JSON";
+    private static String URL;
     private static RequestQueue queue;
-    private static MainActivity mainActivity;
+    private static StopsActivity stopsActivity;
+    public static String name = "DEFAULT";
 
 
-    public static void call(MainActivity mainActivity)
+    public static void call(StopsActivity stopsActivity, int id)
     {
-        LocationsAPI.mainActivity = mainActivity;
-        queue = Volley.newRequestQueue(LocationsAPI.mainActivity);
+        ArrivalsAPI.stopsActivity = stopsActivity;
+        queue = Volley.newRequestQueue(ArrivalsAPI.stopsActivity);
 
         Response.Listener <JSONObject> listener = new Response.Listener<JSONObject>()
         {
@@ -39,8 +42,12 @@ public class LocationsAPI
                 try
                 {
                     JSONObject initialQuery = new JSONObject(response.toString());
-                    JSONObject first = initialQuery.getJSONObject("ctatt");
-                    Log.d("tmst", first.getString("tmst"));
+                    JSONObject ctatt = (JSONObject) initialQuery.getJSONObject("ctatt");
+                    JSONArray eta = (JSONArray) ctatt.getJSONArray("eta");
+                    JSONObject etaInfo = (JSONObject) eta.get(0);
+                    Log.d("etaInfo", etaInfo.toString());
+                    name = etaInfo.getString("staNm");
+                    ArrivalsActivity.updateName();
                 } catch (JSONException e)
                 {
                     throw new RuntimeException(e);
@@ -55,7 +62,8 @@ public class LocationsAPI
                 Log.d("ERROR", error.toString());
             }
         };
-        Log.d("LOC", URL);
+        URL = PRE_KEY_URL + API_KEY + POST_KEY_URL1 + id + POST_KEY_URL2;
+        Log.d("ARV", URL);
         queue.add(new JsonObjectRequest(Request.Method.GET, URL, null, listener, error));
     }
 }

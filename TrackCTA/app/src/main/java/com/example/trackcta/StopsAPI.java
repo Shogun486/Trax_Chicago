@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -25,6 +24,8 @@ public class StopsAPI
     private final String STOPS_URL = "https://data.cityofchicago.org/resource/8pix-ypme.json";
     private RequestQueue queue;
     private MainActivity mainActivity;
+
+    // To-implement accessor methods
     public static Map <String, String> line = new HashMap<>();
     public static Map <String, List<String>> stationInfo = new HashMap<>();
 
@@ -35,7 +36,6 @@ public class StopsAPI
         stationInfo.clear();
         this.mainActivity = mainActivity;
         queue = Volley.newRequestQueue(this.mainActivity);
-
 
         Response.Listener <JSONArray> listener = new Response.Listener<JSONArray>()
         {
@@ -97,9 +97,8 @@ public class StopsAPI
                         }
                     }
                     MainActivity.updateStops();
-                    Log.d("URL", STOPS_URL);
+                    Log.d("STP", STOPS_URL);
                     Log.d("stationInfo", stationInfo.toString());
-
                 }
                 catch (JSONException e)
                 {

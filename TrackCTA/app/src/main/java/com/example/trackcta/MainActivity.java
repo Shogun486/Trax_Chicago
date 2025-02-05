@@ -1,10 +1,8 @@
 package com.example.trackcta;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.ListView;
@@ -17,17 +15,18 @@ import java.util.List;
 
 /*
 
-    Opening activity
+    Opening activity allows user to select station, which will then start
+    up a new activity to filter a specific platform/stop at the location
 
 */
 
 public class MainActivity extends AppCompatActivity
 {
+    // To-implement accessor methods
     public static List<String> stops = new ArrayList<>();
     public static List <Integer> ids = new ArrayList<>();
     private static ArrayAdapter<String> adapter;
     private static ListView listView;
-    private int ctr = 0;
 
 
     @Override
@@ -35,12 +34,13 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         stops.clear();
 
+        // API calls
         StopsAPI sapi = new StopsAPI();
         sapi.call(this);
-        LocationsAPI.call(this);
-
+        //LocationsAPI.call(this);
 
         listView = findViewById(R.id.listView);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stops)
@@ -94,14 +94,13 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String stationName =((TextView)view).getText().toString();
-                int stopID = -1;
+                int stopID = -1; // default value
                 stops.clear();
                 ids.clear();
 
-
                 for(String info: StopsAPI.stationInfo.get(stationName))
                 {
-                    Log.d("info", info);
+                    // Separate ID numbers and stop_names into different Lists
                     try
                     {
                         stopID = Integer.parseInt(info);
@@ -112,13 +111,12 @@ public class MainActivity extends AppCompatActivity
                         stops.add(info);
                     }
                 }
-                Log.d("stops", stops.toString());
-                Intent intent = new Intent(getApplicationContext(), StopsDisplayActivity.class);
-                intent.putExtra("stationName", ((TextView)view).getText().toString());
+
+                // Start new activity
+                Intent intent = new Intent(getApplicationContext(), StopsActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     public static void updateStops()
@@ -127,4 +125,5 @@ public class MainActivity extends AppCompatActivity
             adapter.add(station);
         listView.deferNotifyDataSetChanged();
     }
+
 }

@@ -1,10 +1,10 @@
 package com.example.trackcta;
 
-import android.content.Intent;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.Intent;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 public class ArrivalsActivity extends AppCompatActivity
 {
@@ -15,11 +15,14 @@ public class ArrivalsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arrivals);
-        intent = getIntent();
-        int x = intent.getIntExtra("ID", -1);
-        Log.d("REC", String.valueOf(x));
 
+        intent = getIntent();
+        //int ID_index = intent.getIntExtra("ID", -1);
     }
 
+    public static void updateName()
+    {
+        Log.d("TESTING", ArrivalsAPI.name);
+    }
 
 }
