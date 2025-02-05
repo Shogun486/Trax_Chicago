@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.content.Intent;
 
+/*
+    To-implement: shows arrival times for a single stop
+*/
 
 public class ArrivalsActivity extends AppCompatActivity
 {
@@ -24,5 +27,4 @@ public class ArrivalsActivity extends AppCompatActivity
     {
         Log.d("TESTING", ArrivalsAPI.name);
     }
-
 }

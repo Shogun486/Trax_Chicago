@@ -11,9 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /*
-
     TO-IMPLEMENT
-
 */
 
 public class LocationsAPI

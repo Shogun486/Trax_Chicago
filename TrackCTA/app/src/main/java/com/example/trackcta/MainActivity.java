@@ -14,17 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-
     Opening activity allows user to select station, which will then start
     up a new activity to filter a specific platform/stop at the location
-
 */
 
 public class MainActivity extends AppCompatActivity
 {
-    // To-implement accessor methods
-    public static List<String> stops = new ArrayList<>();
-    public static List <Integer> ids = new ArrayList<>();
+    private static List<String> stops = new ArrayList<>();
+    private static List <Integer> ids = new ArrayList<>();
     private static ArrayAdapter<String> adapter;
     private static ListView listView;
 
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity
             {
                 TextView textView = (TextView) super.getView(position, convertView, parent);
                 String stationName = textView.getText().toString();
-                String color = StopsAPI.line.get(stationName);
+                String color = StopsAPI.getColor(stationName);
                 if(color != null && color.equals("red"))
                 {
                     textView.setBackgroundColor(Color.RED);
@@ -98,7 +95,7 @@ public class MainActivity extends AppCompatActivity
                 stops.clear();
                 ids.clear();
 
-                for(String info: StopsAPI.stationInfo.get(stationName))
+                for(String info: StopsAPI.getInfo(stationName))
                 {
                     // Separate ID numbers and stop_names into different Lists
                     try
@@ -121,9 +118,12 @@ public class MainActivity extends AppCompatActivity
 
     public static void updateStops()
     {
-        for(String station: StopsAPI.line.keySet())
+        for(String station: StopsAPI.getStations())
             adapter.add(station);
         listView.deferNotifyDataSetChanged();
     }
 
+    public static ArrayList <String> getStops() { return new ArrayList<>(stops); }
+
+    public static int getID(int index) { return ids.get(index); }
 }

@@ -12,9 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /*
-
     Fetches train arrival times for a unique stop_id
-
 */
 
 public class ArrivalsAPI

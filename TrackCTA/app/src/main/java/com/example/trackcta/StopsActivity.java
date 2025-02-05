@@ -8,23 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import java.util.ArrayList;
 import android.widget.ListView;
 import android.widget.TextView;
 
 /*
-
     Shows all stops for a given station
-
 */
 
 public class StopsActivity extends AppCompatActivity
 {
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> stops;
     private ListView stopsList;
     private Intent intent;
-    private ArrayAdapter<String> adapter;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,8 +31,8 @@ public class StopsActivity extends AppCompatActivity
 
         intent = getIntent();
         stopsList = findViewById(R.id.stopsList);
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MainActivity.stops)
+        stops = MainActivity.getStops();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stops)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -52,9 +49,9 @@ public class StopsActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 //String stationName =((TextView)view).getText().toString();
-                ArrivalsAPI.call(StopsActivity.this, MainActivity.ids.get(position));
+                ArrivalsAPI.call(StopsActivity.this, MainActivity.getID(position));
                 Intent intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
-                intent.putExtra("ID", MainActivity.ids.get(position));
+                intent.putExtra("ID", MainActivity.getID(position));
                 startActivity(intent);
             }
         });

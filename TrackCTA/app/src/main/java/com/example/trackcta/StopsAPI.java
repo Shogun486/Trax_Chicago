@@ -14,20 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.util.Set;
 
 /*
     FETCHES STATION DATA: stop names, 'L' color, lat/long, etc.
 */
+
 public class StopsAPI
 {
     private final String STOPS_URL = "https://data.cityofchicago.org/resource/8pix-ypme.json";
     private RequestQueue queue;
     private MainActivity mainActivity;
-
-    // To-implement accessor methods
-    public static Map <String, String> line = new HashMap<>();
-    public static Map <String, List<String>> stationInfo = new HashMap<>();
+    private static Map <String, String> line = new HashMap<>();
+    private static Map <String, List<String>> stationInfo = new HashMap<>();
 
 
 
@@ -116,4 +115,10 @@ public class StopsAPI
         };
         queue.add(new JsonArrayRequest(Request.Method.GET, STOPS_URL, null, listener, error));
     }
+
+    public static String getColor(String stop) { return line.get(stop); }
+
+    public static Set <String> getStations() { return line.keySet(); }
+
+    public static List <String> getInfo(String stationName) { return stationInfo.get(stationName); }
 }
