@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,6 +47,21 @@ public class StopsDisplayActivity extends AppCompatActivity
         };
         stopsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        stopsList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                //String stationName =((TextView)view).getText().toString();
+                Log.d("INDEX", String.valueOf(position));
+                Intent intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
+                intent.putExtra("ID", MainActivity.ids.get(position));
+                //intent.putExtra("stationName", ((TextView)view).getText().toString());
+                startActivity(intent);
+
+            }
+        });
 
     }
 }

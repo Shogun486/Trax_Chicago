@@ -24,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
 {
     public static List<String> stops = new ArrayList<>();
+    public static List <Integer> ids = new ArrayList<>();
     private static ArrayAdapter<String> adapter;
     private static ListView listView;
     private int ctr = 0;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity
 
         StopsAPI sapi = new StopsAPI();
         sapi.call(this);
+        LocationsAPI.call(this);
+
 
         listView = findViewById(R.id.listView);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stops)
@@ -91,11 +94,23 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 String stationName =((TextView)view).getText().toString();
-
+                int stopID = -1;
                 stops.clear();
-                for(String stopName: StopsAPI.stationInfo.get(stationName))
+                ids.clear();
+
+
+                for(String info: StopsAPI.stationInfo.get(stationName))
                 {
-                    stops.add(stopName);
+                    Log.d("info", info);
+                    try
+                    {
+                        stopID = Integer.parseInt(info);
+                        ids.add(stopID);
+                    }
+                    catch (NumberFormatException e)
+                    {
+                        stops.add(info);
+                    }
                 }
                 Log.d("stops", stops.toString());
                 Intent intent = new Intent(getApplicationContext(), StopsDisplayActivity.class);
@@ -104,7 +119,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //LocationsAPI.call(this);
     }
 
     public static void updateStops()

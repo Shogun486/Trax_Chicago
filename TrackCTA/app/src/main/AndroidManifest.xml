@@ -27,6 +27,8 @@
         <activity android:name=".StopsDisplayActivity"
                   android:parentActivityName=".MainActivity"
                   android:exported="false"/>
+        <activity android:name=".ArrivalsActivity"
+                  android:exported="false"/>
     </application>
 
 </manifest>

@@ -51,9 +51,12 @@ public class StopsAPI
                         JSONObject info = arr.getJSONObject(i);
                         String stationName = info.getString("station_name");
                         String stopName = info.getString("stop_name");
+                        String stopID = info.getString("stop_id");
+
                         if(!stationInfo.containsKey(stationName))
                             stationInfo.put(stationName, new ArrayList<>());
                         stationInfo.get(stationName).add(stopName);
+                        stationInfo.get(stationName).add(stopID);
 
                         String color = "unknown";
                         if(!line.containsKey(stationName))
