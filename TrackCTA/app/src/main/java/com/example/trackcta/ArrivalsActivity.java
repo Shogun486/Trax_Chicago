@@ -4,14 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.Intent;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
 /*
-    To-implement: shows arrival times for a single stop
+    Shows arrival times for a single stop
 */
 
 public class ArrivalsActivity extends AppCompatActivity
 {
     private Intent intent;
+    protected RecyclerView recyclerView;
+    private ArrivalsAdapter ap;
+    protected static final ArrayList<ArrivalsInfo> alt = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,9 +27,16 @@ public class ArrivalsActivity extends AppCompatActivity
         setContentView(R.layout.activity_arrivals);
 
         intent = getIntent();
-        //int ID_index = intent.getIntExtra("ID", -1);
+        int position = intent.getIntExtra("POSITION", -1);
+        ArrivalsAPI.call(this, MainActivity.getID(position));
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ap = new ArrivalsAdapter(this, alt);
+        recyclerView.setAdapter(ap);
     }
 
+    // Logging
     public static void updateName()
     {
         Log.d("TESTING", ArrivalsAPI.name);

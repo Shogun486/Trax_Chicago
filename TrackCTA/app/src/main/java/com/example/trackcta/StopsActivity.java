@@ -49,9 +49,8 @@ public class StopsActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 //String stationName =((TextView)view).getText().toString();
-                ArrivalsAPI.call(StopsActivity.this, MainActivity.getID(position));
                 Intent intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
-                intent.putExtra("ID", MainActivity.getID(position));
+                intent.putExtra("POSITION", position);
                 startActivity(intent);
             }
         });

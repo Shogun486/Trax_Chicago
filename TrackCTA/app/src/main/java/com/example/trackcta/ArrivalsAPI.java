@@ -23,29 +23,41 @@ public class ArrivalsAPI
             POST_KEY_URL2 = "&outputType=JSON";
     private static String URL;
     private static RequestQueue queue;
-    private static StopsActivity stopsActivity;
-    public static String name = "DEFAULT";
+    public static String name = "DEFAULT", destination = "", serviceDesc = "";
+    private static ArrivalsActivity arrivalsActivity;
 
 
-    public static void call(StopsActivity stopsActivity, int id)
+
+    public static void call(ArrivalsActivity arrivalsActivity, int id)
     {
-        ArrivalsAPI.stopsActivity = stopsActivity;
-        queue = Volley.newRequestQueue(ArrivalsAPI.stopsActivity);
+        ArrivalsAPI.arrivalsActivity = arrivalsActivity;
+        queue = Volley.newRequestQueue(ArrivalsAPI.arrivalsActivity);
 
         Response.Listener <JSONObject> listener = new Response.Listener<JSONObject>()
         {
             @Override
             public void onResponse(JSONObject response)
             {
+                arrivalsActivity.alt.clear();
                 try
                 {
+
                     JSONObject initialQuery = new JSONObject(response.toString());
                     JSONObject ctatt = (JSONObject) initialQuery.getJSONObject("ctatt");
                     JSONArray eta = (JSONArray) ctatt.getJSONArray("eta");
                     JSONObject etaInfo = (JSONObject) eta.get(0);
                     Log.d("etaInfo", etaInfo.toString());
                     name = etaInfo.getString("staNm");
-                    ArrivalsActivity.updateName();
+                    destination = etaInfo.getString("destNm");
+                    serviceDesc = etaInfo.getString("stpDe");
+                    ArrivalsActivity.updateName(); // Logging
+
+                    ArrivalsInfo info = new ArrivalsInfo(destination, serviceDesc);
+                    arrivalsActivity.alt.add(info);
+                    ArrivalsAdapter ap = new ArrivalsAdapter(arrivalsActivity, arrivalsActivity.alt);
+                    arrivalsActivity.recyclerView.setAdapter(ap);
+                    ap.notifyDataSetChanged();
+
                 } catch (JSONException e)
                 {
                     throw new RuntimeException(e);
