@@ -49,7 +49,7 @@ public class StopsActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 //to get stop name: ((TextView)view).getText().toString();
-                Intent intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
+                intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
                 intent.putExtra("POSITION", position);
                 startActivity(intent);
             }

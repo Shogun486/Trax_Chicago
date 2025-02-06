@@ -32,7 +32,7 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
         // Recognize the entries to populate
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.arrivals_entry, parent, false);
 
-        //itemView.setOnClickListener(mainActivity);
+        itemView.setOnClickListener(arrivalsActivity);
         return new ArrivalsViewHolder(itemView);
     }
 
