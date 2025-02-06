@@ -4,15 +4,16 @@ import java.io.Serializable;
 
 public class ArrivalsInfo implements Serializable
 {
-    private String destination, serviceDesc;
+    private String arrivalTime;
+    private int run;
 
-    public ArrivalsInfo(String destination, String serviceDesc)
+    public ArrivalsInfo(String arrivalTime, int run)
     {
-        this.destination = destination;
-        this.serviceDesc = serviceDesc;
+        this.arrivalTime = arrivalTime;
+        this.run = run;
     }
 
-    public String getDestination() { return destination; }
+    public String getArrivalTime() { return arrivalTime; }
 
-    public String getServiceDesc() { return serviceDesc; }
+    public int getRun() { return run; }
 }

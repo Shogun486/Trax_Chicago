@@ -96,7 +96,7 @@ public class StopsAPI
                         }
                     }
                     MainActivity.updateStops();
-                    Log.d("STP", STOPS_URL);
+                    Log.d("URL", STOPS_URL);
                     Log.d("stationInfo", stationInfo.toString());
                 }
                 catch (JSONException e)

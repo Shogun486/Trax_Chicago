@@ -20,7 +20,7 @@
         />
 
     <TextView
-        android:id="@+id/textViewStopDest"
+        android:id="@+id/textViewRunNumber"
         android:layout_width="263dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -47,7 +47,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageViewEntryCTA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textViewStopDest"
+        app:layout_constraintStart_toStartOf="@+id/textViewRunNumber"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.774" />
 

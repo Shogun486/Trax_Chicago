@@ -53,7 +53,7 @@ public class LocationsAPI
                 Log.d("ERROR", error.toString());
             }
         };
-        Log.d("LOC", URL);
+        Log.d("URL", URL);
         queue.add(new JsonObjectRequest(Request.Method.GET, URL, null, listener, error));
     }
 }

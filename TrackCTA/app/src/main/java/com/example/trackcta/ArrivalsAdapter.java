@@ -41,8 +41,8 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
     {
         info = alt.get(position);
 
-        holder.textViewStopDest.setText(info.getDestination());
-        holder.textViewArrivalTime.setText(info.getServiceDesc());
+        holder.textViewRunNumber.setText(String.valueOf(info.getRun()));
+        holder.textViewArrivalTime.setText(info.getArrivalTime());
     }
 
     @Override

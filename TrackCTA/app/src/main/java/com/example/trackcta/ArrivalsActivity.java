@@ -35,10 +35,4 @@ public class ArrivalsActivity extends AppCompatActivity
         ap = new ArrivalsAdapter(this, alt);
         recyclerView.setAdapter(ap);
     }
-
-    // Logging
-    public static void updateName()
-    {
-        Log.d("TESTING", ArrivalsAPI.name);
-    }
 }
