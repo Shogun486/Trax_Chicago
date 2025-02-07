@@ -33,14 +33,23 @@ public class FollowTrainAPI
             @Override
             public void onResponse(JSONObject response)
             {
+                visualizerActivity.alv.clear();
 
                 try
                 {
                     JSONObject initialQuery = new JSONObject(response.toString());
                     JSONObject ctatt = (JSONObject) initialQuery.get("ctatt");
                     JSONArray eta = (JSONArray) ctatt.getJSONArray("eta");
-                    //JSONObject first = (JSONObject) eta.get(0);
+                    JSONObject first = (JSONObject) eta.get(0);
+                    String stationName = first.getString("staNm");
+                    String arrivalTime = first.getString("arrT");
                     Log.d("eta", eta.toString());
+
+                    VisualizerInfo info = new VisualizerInfo(stationName, arrivalTime);
+                    visualizerActivity.alv.add(info);
+                    VisualizerAdapter va = new VisualizerAdapter(visualizerActivity, visualizerActivity.alv);
+                    visualizerActivity.recyclerViewVisualizer.setAdapter(va);
+                    va.notifyDataSetChanged();
 
                 } catch (JSONException e)
                 {
