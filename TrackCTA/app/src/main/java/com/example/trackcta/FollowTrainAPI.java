@@ -11,6 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+    Fetches a single train's predicted time of arrival for the next hour
+*/
 public class FollowTrainAPI
 {
 

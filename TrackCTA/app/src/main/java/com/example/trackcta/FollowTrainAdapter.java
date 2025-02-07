@@ -1,15 +1,17 @@
 package com.example.trackcta;
 
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+/*
+    Adapter for RecyclerView in FollowTrainActivity
+*/
 
 public class FollowTrainAdapter extends RecyclerView.Adapter<FollowTrainViewHolder>
 {
@@ -27,8 +29,6 @@ public class FollowTrainAdapter extends RecyclerView.Adapter<FollowTrainViewHold
     @Override
     public FollowTrainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.follow_train_entry, parent, false);
-
-        //itemView.setOnClickListener(arrivalsActivity);
         return new FollowTrainViewHolder(itemView);
     }
 

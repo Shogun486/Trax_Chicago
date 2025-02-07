@@ -3,18 +3,30 @@ package com.example.trackcta;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.util.Log;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import android.widget.TextView;
+
+/*
+    Shows live-tracking feature based on estimated time of arrival
+*/
 
 
 public class VisualizerActivity extends AppCompatActivity
 {
+    private TextView textView50, textView75;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visualizer_activity);
+
+        textView50 = findViewById(R.id.textView50);
+        textView75 = findViewById(R.id.textView75);
+
 
         Intent intent = getIntent();
 
@@ -33,6 +45,31 @@ public class VisualizerActivity extends AppCompatActivity
             seconds += 3600;
 
         Log.d("SECONDS", String.valueOf(seconds));
+
+
+        //test countdown
+        seconds = 30000;
+        int quarter = seconds / 3;
+        int countDownInterval = 1000;
+
+        new CountDownTimer(seconds, countDownInterval)
+        {
+            int sum = 0;
+
+            public void onTick(long millisUntilFinished) {
+                textView50.setText("seconds remaining: " + millisUntilFinished / 1000);
+                sum += countDownInterval;
+                if(sum == quarter) {
+                    Log.d("QUARTER", String.valueOf(millisUntilFinished));
+                    sum = 0;
+                }
+            }
+
+            public void onFinish() {
+                textView75.setText("done!");
+            }
+        }.start();
+
         //convertFromMilitary(currentTime);
 
     }

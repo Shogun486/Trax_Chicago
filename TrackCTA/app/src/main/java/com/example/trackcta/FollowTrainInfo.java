@@ -2,6 +2,9 @@ package com.example.trackcta;
 
 import java.io.Serializable;
 
+/*
+    Binds to FollowTrainAdapter
+*/
 public class FollowTrainInfo implements Serializable
 {
     private String stationName, arrivalTime;
