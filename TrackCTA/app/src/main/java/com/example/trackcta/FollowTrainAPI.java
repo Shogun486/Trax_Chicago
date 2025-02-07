@@ -40,13 +40,16 @@ public class FollowTrainAPI
                     JSONObject initialQuery = new JSONObject(response.toString());
                     JSONObject ctatt = (JSONObject) initialQuery.get("ctatt");
                     JSONArray eta = (JSONArray) ctatt.getJSONArray("eta");
-                    JSONObject first = (JSONObject) eta.get(0);
-                    String stationName = first.getString("staNm");
-                    String arrivalTime = first.getString("arrT");
-                    Log.d("eta", eta.toString());
+                    int len = eta.length();
+                    String stationName = "", arrivalTime = "";
+                    for(int i = 0; i < len; i++) {
+                        JSONObject etaInfo = (JSONObject) eta.get(i);
+                        stationName = etaInfo.getString("staNm");
+                        arrivalTime = etaInfo.getString("arrT");
 
-                    VisualizerInfo info = new VisualizerInfo(stationName, arrivalTime);
-                    visualizerActivity.alv.add(info);
+                        VisualizerInfo info = new VisualizerInfo(stationName, arrivalTime);
+                        visualizerActivity.alv.add(info);
+                    }
                     VisualizerAdapter va = new VisualizerAdapter(visualizerActivity, visualizerActivity.alv);
                     visualizerActivity.recyclerViewVisualizer.setAdapter(va);
                     va.notifyDataSetChanged();

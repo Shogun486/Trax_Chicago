@@ -42,6 +42,12 @@ public class VisualizerAdapter extends RecyclerView.Adapter<VisualizerViewHolder
         holder.textViewStopArrivalTime.setText(stopArrivalTime);
         holder.textViewStationName.setText(stationName);
 
+        String minutesDisplay = "";
+        String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        String arrivalTime = info.getArrivalTime().split("T")[1];
+        minutesDisplay += MainActivity.getTimeDifference(currentTime, arrivalTime);
+        holder.textViewStopArrivalTime.setText(minutesDisplay);
+
     }
 
     @Override
