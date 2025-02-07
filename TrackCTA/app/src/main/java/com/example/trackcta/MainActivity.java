@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     private static List <Integer> ids = new ArrayList<>();
     private static ArrayAdapter<String> adapter;
     private static ListView listView;
+    private static int differenceInHours, differenceInMinutes, differenceInSeconds;
 
 
     @Override
@@ -174,13 +175,13 @@ public class MainActivity extends AppCompatActivity
             throw new RuntimeException(e);
         }
 
-        long differenceInMilliSeconds = Math.abs(d2.getTime() - d1.getTime()),
-                differenceInHours = (differenceInMilliSeconds / (60 * 60 * 1000)) % 24,
-                differenceInMinutes = (differenceInMilliSeconds / (60 * 1000)) % 60,
-                differenceInSeconds = (differenceInMilliSeconds / 1000) % 60;
+        long differenceInMilliSeconds = Math.abs(d2.getTime() - d1.getTime());
+        differenceInHours = (int) (differenceInMilliSeconds / (60 * 60 * 1000)) % 24;
+        differenceInMinutes = (int) (differenceInMilliSeconds / (60 * 1000)) % 60;
+        differenceInSeconds = (int) (differenceInMilliSeconds / 1000) % 60;
+
 
         String hoursDisplay = differenceInHours == 0 ? "" : differenceInHours + " hour, ";
-
         String minutesDisplay = "";
         if(differenceInMinutes == 0)
         {
@@ -207,6 +208,20 @@ public class MainActivity extends AppCompatActivity
 
         return hoursDisplay + minutesDisplay + secondsDisplay;
     }
+
+    public static int getMinutesDifference(String now, String future)
+    {
+        getTimeDifference(now, future);
+        return differenceInMinutes;
+    }
+
+    public static int getSecondsDifference(String now, String future)
+    {
+        getTimeDifference(now, future);
+        return differenceInSeconds;
+    }
+
+    public static boolean hourWait() { return differenceInHours == 1; }
 
     public static void updateStops()
     {

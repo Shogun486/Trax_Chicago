@@ -20,10 +20,10 @@ public class FollowTrainAPI
             POST_KEY_URL2 = "&outputType=JSON";
     private static String URL;
     private static RequestQueue queue;
-    private static VisualizerActivity visualizerActivity;
+    private static FollowTrainActivity visualizerActivity;
 
 
-    public static void call(VisualizerActivity visualizerActivity, int run)
+    public static void call(FollowTrainActivity visualizerActivity, int run)
     {
         FollowTrainAPI.visualizerActivity = visualizerActivity;
         queue = Volley.newRequestQueue(FollowTrainAPI.visualizerActivity);
@@ -47,10 +47,10 @@ public class FollowTrainAPI
                         stationName = etaInfo.getString("staNm");
                         arrivalTime = etaInfo.getString("arrT");
 
-                        VisualizerInfo info = new VisualizerInfo(stationName, arrivalTime);
+                        FollowTrainInfo info = new FollowTrainInfo(stationName, arrivalTime);
                         visualizerActivity.alv.add(info);
                     }
-                    VisualizerAdapter va = new VisualizerAdapter(visualizerActivity, visualizerActivity.alv);
+                    FollowTrainAdapter va = new FollowTrainAdapter(visualizerActivity, visualizerActivity.alv);
                     visualizerActivity.recyclerViewVisualizer.setAdapter(va);
                     va.notifyDataSetChanged();
 
