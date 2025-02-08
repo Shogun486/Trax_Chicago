@@ -7,6 +7,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /*
@@ -16,7 +17,9 @@ import android.widget.TextView;
 
 public class VisualizerActivity extends AppCompatActivity
 {
-    private TextView textView50, textView75;
+    private ImageView imageView, imageViewTrain, imageView2, imageView6,
+            imageView7, imageView8, imageView9, imageView10, imageView12;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,8 +27,19 @@ public class VisualizerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visualizer_activity);
 
-        textView50 = findViewById(R.id.textView50);
-        textView75 = findViewById(R.id.textView75);
+        imageView = findViewById(R.id.imageView);
+        imageViewTrain = findViewById(R.id.imageViewTrain);
+        imageView2 = findViewById(R.id.imageView2);
+        imageView6 = findViewById(R.id.imageView6);
+        imageView7 = findViewById(R.id.imageView7);
+        imageView10 = findViewById(R.id.imageView10);
+        imageView8 = findViewById(R.id.imageView8);
+        imageView9 = findViewById(R.id.imageView9);
+        imageView12 = findViewById(R.id.imageView12);
+        textView = findViewById(R.id.textView);
+
+
+
 
 
         Intent intent = getIntent();
@@ -51,22 +65,27 @@ public class VisualizerActivity extends AppCompatActivity
         seconds = 30000;
         int quarter = seconds / 3;
         int countDownInterval = 1000;
+        imageViewTrain.setImageResource(R.drawable.train);
 
         new CountDownTimer(seconds, countDownInterval)
         {
             int sum = 0;
 
-            public void onTick(long millisUntilFinished) {
-                textView50.setText("seconds remaining: " + millisUntilFinished / 1000);
+            public void onTick(long millisUntilFinished)
+            {
+
+                textView.setText("seconds remaining: " + millisUntilFinished / 1000);
                 sum += countDownInterval;
                 if(sum == quarter) {
+                    imageView7.setImageResource(R.drawable.check);
+
                     Log.d("QUARTER", String.valueOf(millisUntilFinished));
                     sum = 0;
                 }
             }
 
             public void onFinish() {
-                textView75.setText("done!");
+                textView.setText("done!");
             }
         }.start();
 
