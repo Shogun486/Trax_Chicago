@@ -28,11 +28,13 @@
                   android:parentActivityName=".MainActivity"
                   android:exported="false"/>
         <activity android:name=".ArrivalsActivity"
+                  android:parentActivityName=".StopsActivity"
                   android:exported="false"/>
         <activity android:name=".FollowTrainActivity"
-            android:exported="false"/>
+                  android:exported="false"/>
         <activity android:name=".VisualizerActivity"
-            android:exported="false"/>
+                  android:parentActivityName=".ArrivalsActivity"
+                  android:exported="false"/>
     </application>
 
 </manifest>

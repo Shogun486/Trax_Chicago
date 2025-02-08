@@ -1,8 +1,11 @@
 package com.example.trackcta;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +21,7 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     protected RecyclerView recyclerView;
     private ArrivalsAdapter ap;
     protected static ArrayList<ArrivalsInfo> alt = new ArrayList<>();
+    private int POS, RES;
 
 
     @Override
@@ -27,8 +31,14 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_arrivals);
 
         intent = getIntent();
-        int position = intent.getIntExtra("POSITION", -1);
-        ArrivalsAPI.call(this, MainActivity.getID(position));
+        //int position = intent.getIntExtra("POSITION", -1);
+        POS = intent.getIntExtra("POSITION", -1);
+        Log.d("POS", String.valueOf(POS));
+
+        if(POS == -1)
+            POS = RES;
+
+        ArrivalsAPI.call(this, MainActivity.getID(POS));
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -36,6 +46,21 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
         recyclerView.setAdapter(ap);
     }
 
+
+
+@Override
+public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+    outState.putInt("POSITION", POS);
+    super.onSaveInstanceState(outState, outPersistentState);
+    Log.d("POS", String.valueOf(POS));
+}
+
+@Override
+protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+    super.onRestoreInstanceState(savedInstanceState);
+    RES = savedInstanceState.getInt("POSITION");
+    Log.d("RES", String.valueOf(RES));
+}
 
     @Override
     public void onClick(View view)

@@ -52,10 +52,9 @@ public class StopsAPI
                         String stopName = info.getString("stop_name");
                         String stopID = info.getString("stop_id");
 
-                        if(!stationInfo.containsKey(stationName))
-                            stationInfo.put(stationName, new ArrayList<>());
-                        stationInfo.get(stationName).add(stopName);
-                        stationInfo.get(stationName).add(stopID);
+
+                        //stationInfo.get(stationName).add(stopName);
+                        //stationInfo.get(stationName).add(stopID);
 
                         String color = "unknown";
 
@@ -92,8 +91,13 @@ public class StopsAPI
                                 color = "orange";
                             }
                             line.put(stationName, color);
-
-                        mainActivity.al.add(new StationsInfo(color, stationName));
+                        if(!stationInfo.containsKey(stationName))
+                        {
+                            stationInfo.put(stationName, new ArrayList<>());
+                            mainActivity.al.add(new StationsInfo(color, stationName));
+                        }
+                        stationInfo.get(stationName).add(stopName);
+                        stationInfo.get(stationName).add(stopID);
                     }
 
 
