@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class StationsViewHolder extends RecyclerView.ViewHolder
 {
-    // Protected variables since adapter will require these views to bind
     protected TextView textViewMainStationName, textViewLineColor1, textViewLineColor2, textViewLineColor3,
             textViewLineColor4, textViewLineColor5, textViewLineColor6;
+
 
     public StationsViewHolder(@NonNull View itemView)
     {
@@ -22,8 +22,5 @@ public class StationsViewHolder extends RecyclerView.ViewHolder
         textViewLineColor4 = itemView.findViewById(R.id.textViewLineColor4);
         textViewLineColor5 = itemView.findViewById(R.id.textViewLineColor5);
         textViewLineColor6 = itemView.findViewById(R.id.textViewLineColor6);
-
-
-
     }
 }

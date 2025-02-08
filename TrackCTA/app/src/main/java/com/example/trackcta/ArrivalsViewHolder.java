@@ -12,10 +12,11 @@ public class ArrivalsViewHolder extends RecyclerView.ViewHolder
     protected ImageView imageViewEntryCTA;
     protected TextView textViewRunNumber, textViewArrivalTime;
 
+
     public ArrivalsViewHolder(@NonNull View itemView)
     {
         super(itemView);
-        imageViewEntryCTA = itemView.findViewById(R.id.imageViewEntryCTA); // to-implement: physical stop image
+        imageViewEntryCTA = itemView.findViewById(R.id.imageViewEntryCTA);
         textViewRunNumber = itemView.findViewById(R.id.textViewRunNumber);
         textViewArrivalTime = itemView.findViewById(R.id.textViewArrivalTime);
     }

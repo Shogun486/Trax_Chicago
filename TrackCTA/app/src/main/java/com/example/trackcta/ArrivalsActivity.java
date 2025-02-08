@@ -31,10 +31,7 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_arrivals);
 
         intent = getIntent();
-        //int position = intent.getIntExtra("POSITION", -1);
         POS = intent.getIntExtra("POSITION", -1);
-        Log.d("POS", String.valueOf(POS));
-
         if(POS == -1)
             POS = RES;
 
@@ -47,21 +44,6 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
-@Override
-public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-    outState.putInt("POSITION", POS);
-    super.onSaveInstanceState(outState, outPersistentState);
-    Log.d("POS", String.valueOf(POS));
-}
-
-@Override
-protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-    super.onRestoreInstanceState(savedInstanceState);
-    RES = savedInstanceState.getInt("POSITION");
-    Log.d("RES", String.valueOf(RES));
-}
-
     @Override
     public void onClick(View view)
     {
@@ -70,5 +52,21 @@ protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         intent.putExtra("RUN", info.getRun());
         intent.putExtra("ARRIVAL", info.getArrivalTime());
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState)
+    {
+        outState.putInt("POSITION", POS);
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
+    {
+        super.onRestoreInstanceState(savedInstanceState);
+        RES = savedInstanceState.getInt("POSITION");
     }
 }

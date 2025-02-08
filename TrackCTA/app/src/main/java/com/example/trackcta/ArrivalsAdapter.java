@@ -26,6 +26,7 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
     private ArrivalsInfo info;
     private List <ArrivalsInfo> alt;
 
+
     ArrivalsAdapter(ArrivalsActivity arrivalsActivity, List <ArrivalsInfo> alt)
     {
         this.arrivalsActivity = arrivalsActivity;
@@ -39,10 +40,10 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
     {
         // Recognize the entries to populate
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.arrivals_entry, parent, false);
-
         itemView.setOnClickListener(arrivalsActivity);
         return new ArrivalsViewHolder(itemView);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ArrivalsViewHolder holder, int position)
@@ -60,6 +61,7 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
         minutesDisplay += MainActivity.getTimeDifference(currentTime, arrivalTime);
         holder.textViewArrivalTime.setText(minutesDisplay);
     }
+
 
     @Override
     public int getItemCount() { return alt.size(); }

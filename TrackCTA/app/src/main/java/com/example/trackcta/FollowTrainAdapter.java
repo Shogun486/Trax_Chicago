@@ -19,18 +19,22 @@ public class FollowTrainAdapter extends RecyclerView.Adapter<FollowTrainViewHold
     private FollowTrainInfo info;
     private List <FollowTrainInfo> alv;
 
+
     FollowTrainAdapter(FollowTrainActivity visualizerActivity, List <FollowTrainInfo> alv)
     {
         this.visualizerActivity = visualizerActivity;
         this.alv = alv;
     }
 
+
     @NonNull
     @Override
-    public FollowTrainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FollowTrainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.follow_train_entry, parent, false);
         return new FollowTrainViewHolder(itemView);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull FollowTrainViewHolder holder, int position)
@@ -49,6 +53,7 @@ public class FollowTrainAdapter extends RecyclerView.Adapter<FollowTrainViewHold
         holder.textViewStopArrivalTime.setText(minutesDisplay);
 
     }
+
 
     @Override
     public int getItemCount() { return alv.size(); }

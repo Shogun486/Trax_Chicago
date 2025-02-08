@@ -34,11 +34,8 @@ public class MainActivity extends AppCompatActivity
     private static List <Integer> ids = new ArrayList<>();
     private static int differenceInHours, differenceInMinutes, differenceInSeconds;
     protected RecyclerView recyclerViewMain;
-    protected static ArrayList<StationsInfo> al = new ArrayList<>();
+    protected static ArrayList<String> al = new ArrayList<>();
     private StationsAdapter sa;
-
-
-
 
 
     @Override
@@ -51,9 +48,6 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle("Which station are you using today?");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
-
-
-
         stops.clear();
 
         // API calls
@@ -65,95 +59,15 @@ public class MainActivity extends AppCompatActivity
         recyclerViewMain.setLayoutManager(new LinearLayoutManager(this));
         sa = new StationsAdapter(this, al);
         recyclerViewMain.setAdapter(sa);
-
-
-
-        /*
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                TextView textView = (TextView) super.getView(position, convertView, parent);
-                String stationName = textView.getText().toString();
-                String color = StopsAPI.getColor(stationName);
-                if(color != null && color.equals("red"))
-                {
-                    textView.setBackgroundColor(Color.RED);
-                }
-                else if(color != null && color.equals("blue"))
-                {
-                    textView.setBackgroundColor(Color.BLUE);
-                }
-                else if(color != null && color.equals("green"))
-                {
-                    textView.setBackgroundColor(Color.GREEN);
-                }
-                else if(color != null && color.equals("brown"))
-                {
-                    textView.setBackgroundColor(Color.rgb(150, 75, 0));
-                }
-                else if(color != null && color.equals("purple"))
-                {
-                    textView.setBackgroundColor(getResources().getColor(R.color.purple_700));
-                }
-                else if(color != null && color.equals("yellow"))
-                {
-                    textView.setBackgroundColor(Color.YELLOW);
-                }
-                else if(color != null && color.equals("pink"))
-                {
-                    textView.setBackgroundColor(getResources().getColor(R.color.purple_200));
-                }
-                else if(color != null && color.equals("orange"))
-                {
-                    textView.setBackgroundColor(Color.rgb(255, 165, 0));
-                }
-
-                return textView;
-            }
-            */
-
-
-
-/*
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                String stationName =((TextView)view).getText().toString();
-                int stopID = -1; // default value
-                stops.clear();
-                ids.clear();
-
-                for(String info: StopsAPI.getInfo(stationName))
-                {
-                    // Separate ID numbers and stop_names into different Lists
-                    try
-                    {
-                        stopID = Integer.parseInt(info);
-                        ids.add(stopID);
-                    }
-                    catch (NumberFormatException e)
-                    {
-                        stops.add(info);
-                    }
-                }
-
-                // Start new activity
-                Intent intent = new Intent(getApplicationContext(), StopsActivity.class);
-                startActivity(intent);
-            }
-        });*/
-
     }
 
 
     public void onClick(View view)
     {
-        StationsInfo i = al.get(recyclerViewMain.getChildLayoutPosition(view));
-        Log.d("checking", i.getColor());
+        String i = al.get(recyclerViewMain.getChildLayoutPosition(view));
+        //Log.d("checking", i.getColor());
 
-        String stationName =i.getStationName();
+        String stationName = i;
 
         int stopID = -1; // default value
         stops.clear();
@@ -173,15 +87,12 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-
         Intent intent = new Intent(this, StopsActivity.class);
-        //intent.putExtra("POLITICIAN", p);;
         startActivity(intent);
-
-
     }
 
 
+    // Helper functions for time-related displays or calculations
     public static void convertFromMilitary(String time)
     {
         int h1 = (int) time.charAt(0) - '0', h2 = (int) time.charAt(1)- '0', hour = h1 * 10 + h2;
@@ -268,11 +179,13 @@ public class MainActivity extends AppCompatActivity
         return hoursDisplay + minutesDisplay + secondsDisplay;
     }
 
+
     public static int getMinutesDifference(String now, String future)
     {
         getTimeDifference(now, future);
         return differenceInMinutes;
     }
+
 
     public static int getSecondsDifference(String now, String future)
     {
@@ -282,15 +195,9 @@ public class MainActivity extends AppCompatActivity
 
     public static boolean hourWait() { return differenceInHours == 1; }
 
-    /*
-    public static void updateStops()
-    {
-        for(String station: StopsAPI.getStations())
-            sa.add(station);
-        listView.deferNotifyDataSetChanged();
-    }*/
 
     public static ArrayList <String> getStops() { return new ArrayList<>(stops); }
+
 
     public static int getID(int index) { return ids.get(index); }
 

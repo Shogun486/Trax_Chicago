@@ -11,6 +11,7 @@ public class FollowTrainViewHolder extends RecyclerView.ViewHolder
     protected ImageView imageViewArrivalStatus;
     protected TextView textViewStationName, textViewStopArrivalTime;
 
+
     public FollowTrainViewHolder(@NonNull View itemView)
     {
         super(itemView);

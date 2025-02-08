@@ -53,14 +53,10 @@ public class StopsAPI
                         String stopName = info.getString("stop_name");
                         String stopID = info.getString("stop_id");
 
-
-                        //stationInfo.get(stationName).add(stopName);
-                        //stationInfo.get(stationName).add(stopID);
                         if(!lineColors.containsKey(stationName))
                             lineColors.put(stationName, new HashSet<>());
 
                         String color = "unknown";
-
                         if(info.getBoolean("red") == true)
                         {
                             color = "Red";
@@ -109,30 +105,19 @@ public class StopsAPI
                         }
 
 
-                        //line.put(stationName, color);
                         if(!stationInfo.containsKey(stationName))
                         {
                             stationInfo.put(stationName, new ArrayList<>());
-                            mainActivity.al.add(new StationsInfo(color, stationName));
+                            mainActivity.al.add(stationName);
                         }
                         stationInfo.get(stationName).add(stopName);
                         stationInfo.get(stationName).add(stopID);
                     }
 
-                   // Log.d("lineColors", lineColors.toString());
-                    int max = -1;
-                    for(Map.Entry<String, Set<String>> entry: lineColors.entrySet())
-                    {
-                        max = Math.max(max, entry.getValue().size());
-                    }
-                    Log.d("max", String.valueOf(max));
-
-
                     StationsAdapter sa = new StationsAdapter(mainActivity, mainActivity.al);
                     mainActivity.recyclerViewMain.setAdapter(sa);
                     sa.notifyDataSetChanged();
 
-                    //MainActivity.updateStops();
                     Log.d("URL", STOPS_URL);
                     Log.d("stationInfo", stationInfo.toString());
                 }
@@ -153,9 +138,6 @@ public class StopsAPI
         queue.add(new JsonArrayRequest(Request.Method.GET, STOPS_URL, null, listener, error));
     }
 
-    //public static String getColor(String stop) { return line.get(stop); }
-
-    //public static Set <String> getStations() { return line.keySet(); }
 
     public static List <String> getInfo(String stationName) { return stationInfo.get(stationName); }
 }
