@@ -60,35 +60,35 @@ public class StopsAPI
 
                             if(info.getBoolean("red") == true)
                             {
-                                color = "red";
+                                color = "Red";
                             }
                             else if(info.getBoolean("blue") == true)
                             {
-                                color = "blue";
+                                color = "Blue";
                             }
                             else if(info.getBoolean("g") == true)
                             {
-                                color = "green";
+                                color = "Green";
                             }
                             else if(info.getBoolean("brn") == true)
                             {
-                                color = "brown";
+                                color = "Brown";
                             }
                             else if(info.getBoolean("p") == true)
                             {
-                                color = "purple";
+                                color = "Purple";
                             }
                             else if(info.getBoolean("y") == true)
                             {
-                                color = "yellow";
+                                color = "Yellow";
                             }
                             else if(info.getBoolean("pnk") == true)
                             {
-                                color = "pink";
+                                color = "Pink";
                             }
                             else if(info.getBoolean("o") == true)
                             {
-                                color = "orange";
+                                color = "Orange";
                             }
                             line.put(stationName, color);
                         if(!stationInfo.containsKey(stationName))
