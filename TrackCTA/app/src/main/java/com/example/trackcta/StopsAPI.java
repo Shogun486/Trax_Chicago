@@ -58,8 +58,7 @@ public class StopsAPI
                         stationInfo.get(stationName).add(stopID);
 
                         String color = "unknown";
-                        if(!line.containsKey(stationName))
-                        {
+
                             if(info.getBoolean("red") == true)
                             {
                                 color = "red";
@@ -93,9 +92,16 @@ public class StopsAPI
                                 color = "orange";
                             }
                             line.put(stationName, color);
-                        }
+
+                        mainActivity.al.add(new StationsInfo(color, stationName));
                     }
-                    MainActivity.updateStops();
+
+
+                    StationsAdapter sa = new StationsAdapter(mainActivity, mainActivity.al);
+                    mainActivity.recyclerViewMain.setAdapter(sa);
+                    sa.notifyDataSetChanged();
+
+                    //MainActivity.updateStops();
                     Log.d("URL", STOPS_URL);
                     Log.d("stationInfo", stationInfo.toString());
                 }

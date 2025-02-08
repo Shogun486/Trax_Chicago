@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 public class VisualizerActivity extends AppCompatActivity
 {
-    private ImageView imageView, imageViewTrain, imageView2, imageView6,
-            imageView7, imageView8, imageView9, imageView10, imageView12;
+    private ImageView imageViewTrain, imageViewS1, imageViewS2, imageViewS3,
+            imageViewS4, imageViewS5, imageViewS6, imageViewS7, imageViewS8;
     private TextView textView;
 
     @Override
@@ -27,20 +27,16 @@ public class VisualizerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visualizer_activity);
 
-        imageView = findViewById(R.id.imageView);
         imageViewTrain = findViewById(R.id.imageViewTrain);
-        imageView2 = findViewById(R.id.imageView2);
-        imageView6 = findViewById(R.id.imageView6);
-        imageView7 = findViewById(R.id.imageView7);
-        imageView10 = findViewById(R.id.imageView10);
-        imageView8 = findViewById(R.id.imageView8);
-        imageView9 = findViewById(R.id.imageView9);
-        imageView12 = findViewById(R.id.imageView12);
         textView = findViewById(R.id.textView);
-
-
-
-
+        imageViewS1 = findViewById(R.id.imageViewS1);
+        imageViewS2 = findViewById(R.id.imageViewS2);
+        imageViewS3 = findViewById(R.id.imageViewS3);
+        imageViewS4 = findViewById(R.id.imageViewS4);
+        imageViewS5 = findViewById(R.id.imageViewS5);
+        imageViewS6 = findViewById(R.id.imageViewS6);
+        imageViewS7 = findViewById(R.id.imageViewS7);
+        imageViewS8 = findViewById(R.id.imageViewS8);
 
         Intent intent = getIntent();
 
@@ -62,30 +58,64 @@ public class VisualizerActivity extends AppCompatActivity
 
 
         //test countdown
-        seconds = 30000;
-        int quarter = seconds / 3;
+        seconds = 37051;
+        // if(seconds < 8) no point in tracking
+        int eighth = seconds / 8;
+        Log.d("eighth", String.valueOf(eighth));
         int countDownInterval = 1000;
         imageViewTrain.setImageResource(R.drawable.train);
 
         new CountDownTimer(seconds, countDownInterval)
         {
             int sum = 0;
-
             public void onTick(long millisUntilFinished)
             {
 
-                textView.setText("seconds remaining: " + millisUntilFinished / 1000);
+                textView.setText("Arriving in " + millisUntilFinished / 1000 + " seconds" );
                 sum += countDownInterval;
-                if(sum == quarter) {
-                    imageView7.setImageResource(R.drawable.check);
+                Log.d("sum", String.valueOf(sum));
 
-                    Log.d("QUARTER", String.valueOf(millisUntilFinished));
-                    sum = 0;
+                if(sum >= eighth * 7)
+                {
+                    imageViewS7.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
+                }
+                else if(sum >= eighth * 6)
+                {
+                    imageViewS6.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
+                }
+                else if(sum >= eighth * 5)
+                {
+                    imageViewS5.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
+                 }
+                else if(sum >= eighth * 4)
+                {
+                    imageViewS4.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
+                }
+                else if(sum >= eighth * 3)
+                {
+                    imageViewS3.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
+                }
+                else if(sum >= eighth * 2)
+                {
+                    imageViewS2.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
+                }
+                else if(sum >= eighth * 1)
+                {
+                    imageViewS1.setImageResource(R.drawable.check);
+                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
             }
 
-            public void onFinish() {
-                textView.setText("done!");
+            public void onFinish()
+            {
+                imageViewS8.setImageResource(R.drawable.check);
+                textView.setText("Train is due!");
             }
         }.start();
 

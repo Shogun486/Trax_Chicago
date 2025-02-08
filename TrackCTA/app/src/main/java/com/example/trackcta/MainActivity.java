@@ -1,6 +1,9 @@
 package com.example.trackcta;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,9 +30,13 @@ public class MainActivity extends AppCompatActivity
 {
     private static List<String> stops = new ArrayList<>();
     private static List <Integer> ids = new ArrayList<>();
-    private static ArrayAdapter<String> adapter;
-    private static ListView listView;
     private static int differenceInHours, differenceInMinutes, differenceInSeconds;
+    protected RecyclerView recyclerViewMain;
+    protected static ArrayList<StationsInfo> al = new ArrayList<>();
+    private StationsAdapter sa;
+
+
+
 
 
     @Override
@@ -45,9 +52,14 @@ public class MainActivity extends AppCompatActivity
         sapi.call(this);
         //LocationsAPI.call(this);
 
-        listView = findViewById(R.id.listView);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stops)
-        {
+        recyclerViewMain = findViewById(R.id.recyclerViewMain);
+        recyclerViewMain.setLayoutManager(new LinearLayoutManager(this));
+        sa = new StationsAdapter(this, al);
+        recyclerViewMain.setAdapter(sa);
+
+
+
+        /*
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
             {
@@ -89,8 +101,11 @@ public class MainActivity extends AppCompatActivity
 
                 return textView;
             }
-        };
-        listView.setAdapter(adapter);
+            */
+
+
+
+/*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -119,7 +134,42 @@ public class MainActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), StopsActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
+
+    }
+
+
+    public void onClick(View view)
+    {
+        StationsInfo i = al.get(recyclerViewMain.getChildLayoutPosition(view));
+        Log.d("checking", i.getColor());
+
+        String stationName =i.getStationName();
+
+        int stopID = -1; // default value
+        stops.clear();
+        ids.clear();
+
+        for(String info: StopsAPI.getInfo(stationName))
+        {
+            // Separate ID numbers and stop_names into different Lists
+            try
+            {
+                stopID = Integer.parseInt(info);
+                ids.add(stopID);
+            }
+            catch (NumberFormatException e)
+            {
+                stops.add(info);
+            }
+        }
+
+
+        Intent intent = new Intent(this, StopsActivity.class);
+        //intent.putExtra("POLITICIAN", p);;
+        startActivity(intent);
+
+
     }
 
 
@@ -223,12 +273,13 @@ public class MainActivity extends AppCompatActivity
 
     public static boolean hourWait() { return differenceInHours == 1; }
 
+    /*
     public static void updateStops()
     {
         for(String station: StopsAPI.getStations())
-            adapter.add(station);
+            sa.add(station);
         listView.deferNotifyDataSetChanged();
-    }
+    }*/
 
     public static ArrayList <String> getStops() { return new ArrayList<>(stops); }
 
