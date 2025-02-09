@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,9 +33,13 @@ public class StopsActivity extends AppCompatActivity
         setContentView(R.layout.activity_stops);
 
         intent = getIntent();
+        String stationName = intent.getStringExtra("stationName");
         stopsList = findViewById(R.id.stopsList);
-        stops = MainActivity.getStops();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stops)
+
+        //Log.d("stationToStops", StopsAPI.stationToStops.get(stationName).toString());
+        stops = StopsAPI.stationToStops.get(stationName);
+        ArrayList <String> l = new ArrayList(new HashSet(stops));
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, l)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -48,9 +55,10 @@ public class StopsActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                // to get stop name: ((TextView)view).getText().toString();
+                String stopName = ((TextView)view).getText().toString();
+                //Log.d("stopclick", stationName);
                 intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
-                intent.putExtra("POSITION", position);
+                intent.putExtra("stopID", StopsAPI.stopIDs.get(stopName));
                 startActivity(intent);
             }
         });

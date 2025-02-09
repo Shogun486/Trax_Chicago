@@ -25,15 +25,21 @@ public class StopsAPI
 {
     private final String STOPS_URL = "https://data.cityofchicago.org/resource/8pix-ypme.json";
     private RequestQueue queue;
-    private MainActivity mainActivity;
+    private StationsActivity mainActivity;
     protected static Map <String, Set<String>> lineColors = new HashMap<>();
-    private static Map <String, List<String>> stationInfo = new HashMap<>();
+    //private static Map <String, List<String>> stationInfo = new HashMap<>();
+    protected static Map<String, ArrayList<String>> stationToStops = new HashMap<>();
+    protected static Map<String, List<String>> stopToColors = new HashMap<>();
+    protected static Map<String, String> stopIDs = new HashMap<>();
 
 
 
-    public void call(MainActivity mainActivity)
+
+    public void call(StationsActivity mainActivity)
     {
-        stationInfo.clear();
+        //stationInfo.clear();
+        //stationToStops.clear();
+
         this.mainActivity = mainActivity;
         queue = Volley.newRequestQueue(this.mainActivity);
 
@@ -52,6 +58,72 @@ public class StopsAPI
                         String stationName = info.getString("station_name");
                         String stopName = info.getString("stop_name");
                         String stopID = info.getString("stop_id");
+
+                        //stopsColors
+                        if(!stationToStops.containsKey(stationName)) {
+                            stationToStops.put(stationName, new ArrayList<>());
+
+                            mainActivity.al.add(stationName);
+
+                        }
+
+                        stationToStops.get(stationName).add(stopName);
+                        //stopIDs.add(stopID);
+
+
+                        if(!stopToColors.containsKey(stopName))
+                        {
+                            stopIDs.put(stopName, stopID);
+                            stopToColors.put(stopName, new ArrayList<>());
+                            if(info.getBoolean("red") == true)
+                            {
+                                stopToColors.get(stopName).add("Red");
+                            }
+                            if(info.getBoolean("blue") == true)
+                            {
+                                stopToColors.get(stopName).add("Blue");
+
+
+                            }
+                            if(info.getBoolean("g") == true)
+                            {
+                                stopToColors.get(stopName).add("Green");
+
+
+                            }
+                            if(info.getBoolean("brn") == true)
+                            {
+                                stopToColors.get(stopName).add("Brown");
+
+
+                            }
+                            if(info.getBoolean("p") == true || info.getBoolean("pexp") == true)
+                            {
+                                stopToColors.get(stopName).add("Purple");
+
+
+                            }
+                            if(info.getBoolean("y") == true)
+                            {
+                                stopToColors.get(stopName).add("Yellow");
+
+
+                            }
+                            if(info.getBoolean("pnk") == true)
+                            {
+                                stopToColors.get(stopName).add("Pink");
+
+
+                            }
+                            if(info.getBoolean("o") == true)
+                            {
+                                stopToColors.get(stopName).add("Orange");
+                            }
+                        }
+
+
+
+                        //stopColors
 
                         if(!lineColors.containsKey(stationName))
                             lineColors.put(stationName, new HashSet<>());
@@ -104,22 +176,26 @@ public class StopsAPI
                             lineColors.get(stationName).add(color);
                         }
 
-
+/*
                         if(!stationInfo.containsKey(stationName))
                         {
                             stationInfo.put(stationName, new ArrayList<>());
-                            mainActivity.al.add(stationName);
                         }
                         stationInfo.get(stationName).add(stopName);
                         stationInfo.get(stationName).add(stopID);
+
+ */
                     }
+
+                    Log.d("newData", stationToStops.toString());
+                    Log.d("newData", stopToColors.toString());
 
                     StationsAdapter sa = new StationsAdapter(mainActivity, mainActivity.al);
                     mainActivity.recyclerViewMain.setAdapter(sa);
                     sa.notifyDataSetChanged();
 
                     Log.d("URL", STOPS_URL);
-                    Log.d("stationInfo", stationInfo.toString());
+                    //Log.d("stationInfo", stationInfo.toString());
                 }
                 catch (JSONException e)
                 {
@@ -139,5 +215,7 @@ public class StopsAPI
     }
 
 
-    public static List <String> getInfo(String stationName) { return stationInfo.get(stationName); }
+    public static List <String> getInfo(String stationName) { return stationToStops.get(stationName); }
+    public static ArrayList <String> getStops(String stationName) { return stationToStops.get(stationName); }
+
 }

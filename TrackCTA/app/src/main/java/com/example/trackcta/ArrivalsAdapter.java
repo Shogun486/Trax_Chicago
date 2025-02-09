@@ -58,7 +58,7 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
         String minutesDisplay = "";
         String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         String arrivalTime = info.getArrivalTime().split("T")[1];
-        minutesDisplay += MainActivity.getTimeDifference(currentTime, arrivalTime);
+        minutesDisplay += StationsActivity.getTimeDifference(currentTime, arrivalTime);
         holder.textViewArrivalTime.setText(minutesDisplay);
     }
 

@@ -21,7 +21,7 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     protected RecyclerView recyclerView;
     private ArrivalsAdapter ap;
     protected static ArrayList<ArrivalsInfo> alt = new ArrayList<>();
-    private int POS, RES;
+    private int ID, RES;
 
 
     @Override
@@ -31,11 +31,19 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_arrivals);
 
         intent = getIntent();
-        POS = intent.getIntExtra("POSITION", -1);
-        if(POS == -1)
-            POS = RES;
+        String stopID = intent.getStringExtra("stopID");
+        ID= -1;
+        try {
+            ID = Integer.parseInt(stopID);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
+        }
+        Log.d("idcheck", String.valueOf(ID));
+        if(ID == -1)
+            ID = RES;
 
-        ArrivalsAPI.call(this, MainActivity.getID(POS));
+        //Log.d("stopID", String.valueOf(ID));
+        ArrivalsAPI.call(this, ID);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -58,7 +66,8 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState)
     {
-        outState.putInt("POSITION", POS);
+        Log.d("onSave","");
+        outState.putInt("POSITION", ID);
         super.onSaveInstanceState(outState, outPersistentState);
     }
 
@@ -66,7 +75,11 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
     {
+        Log.d("onRestore","");
+
         super.onRestoreInstanceState(savedInstanceState);
         RES = savedInstanceState.getInt("POSITION");
     }
+
+
 }

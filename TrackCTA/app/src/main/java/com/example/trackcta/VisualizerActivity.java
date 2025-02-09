@@ -48,10 +48,10 @@ public class VisualizerActivity extends AppCompatActivity
         // Current Time (military)
         String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
-        int minutesDifference = MainActivity.getMinutesDifference(currentTime, arrivalTime);
-        int secondsDifference = MainActivity.getSecondsDifference(currentTime, arrivalTime);
+        int minutesDifference = StationsActivity.getMinutesDifference(currentTime, arrivalTime);
+        int secondsDifference = StationsActivity.getSecondsDifference(currentTime, arrivalTime);
         int seconds = (minutesDifference * 60) + secondsDifference;
-        if(MainActivity.hourWait())
+        if(StationsActivity.hourWait())
             seconds += 3600;
 
         Log.d("SECONDS", String.valueOf(seconds));

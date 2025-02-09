@@ -49,7 +49,7 @@ public class FollowTrainAdapter extends RecyclerView.Adapter<FollowTrainViewHold
         String minutesDisplay = "";
         String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         String arrivalTime = info.getArrivalTime().split("T")[1];
-        minutesDisplay += MainActivity.getTimeDifference(currentTime, arrivalTime);
+        minutesDisplay += StationsActivity.getTimeDifference(currentTime, arrivalTime);
         holder.textViewStopArrivalTime.setText(minutesDisplay);
 
     }

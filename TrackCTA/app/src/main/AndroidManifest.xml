@@ -24,16 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StationsActivity"
+                  android:exported="false"/>
         <activity android:name=".StopsActivity"
-                  android:parentActivityName=".MainActivity"
                   android:exported="false"/>
         <activity android:name=".ArrivalsActivity"
-                  android:parentActivityName=".StopsActivity"
                   android:exported="false"/>
         <activity android:name=".FollowTrainActivity"
                   android:exported="false"/>
         <activity android:name=".VisualizerActivity"
-                  android:parentActivityName=".ArrivalsActivity"
                   android:exported="false"/>
     </application>
 

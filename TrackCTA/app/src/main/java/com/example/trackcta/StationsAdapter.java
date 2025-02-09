@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,12 +24,14 @@ import java.util.Set;
 public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
 
 {
-    private MainActivity mainActivity;
+    private StationsActivity mainActivity;
     //private StationsInfo info;
     private List<String> al;
+    private Set <String> colors = new HashSet<>();
 
 
-    StationsAdapter(MainActivity mainActivity, List <String> al)
+
+    StationsAdapter(StationsActivity mainActivity, List <String> al)
     {
         this.mainActivity = mainActivity;
         this.al = al;
@@ -45,8 +48,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
 
 
     @Override
-    public void onBindViewHolder(@NonNull StationsViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull StationsViewHolder holder, int position) {
         //info = al.get(position);
         String stationName = al.get(position);
 
@@ -59,55 +61,59 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
         holder.textViewLineColor6.setVisibility(View.GONE);
 
 
-        ArrayList <String> temp = new ArrayList<>(StopsAPI.lineColors.get(stationName));
-        int colorAmount = temp.size();
-        for(int i = 0; i < colorAmount; i++)
+        colors.clear();
+        List<String> stops = StopsAPI.stationToStops.get(stationName);
+
+
+        if (StopsAPI.stationToStops != null && StopsAPI.stopToColors != null)
         {
-            String color = temp.get(i);
-            if(i == 0)
+            Log.d("INSIDE", "");
+            for (String stop : stops)
             {
-                holder.textViewLineColor1.setVisibility(View.VISIBLE);
-                holder.textViewLineColor1.setText(color);
-                holder.textViewLineColor1.setTextColor(Color.WHITE);
-                holder.textViewLineColor1.setBackgroundColor(getColorInt(color));
+                for (String color : StopsAPI.stopToColors.get(stop)) {
+                    if (!colors.contains(color))
+                        colors.add(color);
+
+                }
             }
-            else if(i == 1)
-            {
-                holder.textViewLineColor2.setVisibility(View.VISIBLE);
-                holder.textViewLineColor2.setText(color);
-                holder.textViewLineColor2.setTextColor(Color.WHITE);
-                holder.textViewLineColor2.setBackgroundColor(getColorInt(color));
+
+            ArrayList<String> temp = new ArrayList<>(colors);
+            for (int i = 0; i < temp.size(); i++) {
+                String color = temp.get(i);
+                if (i == 0) {
+                    holder.textViewLineColor1.setVisibility(View.VISIBLE);
+                    holder.textViewLineColor1.setText(color);
+                    holder.textViewLineColor1.setTextColor(Color.WHITE);
+                    holder.textViewLineColor1.setBackgroundColor(getColorInt(color));
+                } else if (i == 1) {
+                    holder.textViewLineColor2.setVisibility(View.VISIBLE);
+                    holder.textViewLineColor2.setText(color);
+                    holder.textViewLineColor2.setTextColor(Color.WHITE);
+                    holder.textViewLineColor2.setBackgroundColor(getColorInt(color));
+                } else if (i == 2) {
+                    holder.textViewLineColor3.setVisibility(View.VISIBLE);
+                    holder.textViewLineColor3.setText(color);
+                    holder.textViewLineColor3.setTextColor(Color.WHITE);
+                    holder.textViewLineColor3.setBackgroundColor(getColorInt(color));
+                } else if (i == 3) {
+                    holder.textViewLineColor4.setVisibility(View.VISIBLE);
+                    holder.textViewLineColor4.setText(color);
+                    holder.textViewLineColor4.setTextColor(Color.WHITE);
+                    holder.textViewLineColor4.setBackgroundColor(getColorInt(color));
+                } else if (i == 4) {
+                    holder.textViewLineColor5.setVisibility(View.VISIBLE);
+                    holder.textViewLineColor5.setText(color);
+                    holder.textViewLineColor5.setTextColor(Color.WHITE);
+                    holder.textViewLineColor5.setBackgroundColor(getColorInt(color));
+                } else if (i == 5) {
+                    holder.textViewLineColor6.setVisibility(View.VISIBLE);
+                    holder.textViewLineColor6.setText(color);
+                    holder.textViewLineColor6.setTextColor(Color.WHITE);
+                    holder.textViewLineColor6.setBackgroundColor(getColorInt(color));
+                }
             }
-            else if(i == 2)
-            {
-                holder.textViewLineColor3.setVisibility(View.VISIBLE);
-                holder.textViewLineColor3.setText(color);
-                holder.textViewLineColor3.setTextColor(Color.WHITE);
-                holder.textViewLineColor3.setBackgroundColor(getColorInt(color));
-            }
-            else if(i == 3)
-            {
-                holder.textViewLineColor4.setVisibility(View.VISIBLE);
-                holder.textViewLineColor4.setText(color);
-                holder.textViewLineColor4.setTextColor(Color.WHITE);
-                holder.textViewLineColor4.setBackgroundColor(getColorInt(color));
-            }
-            else if(i == 4)
-            {
-                holder.textViewLineColor5.setVisibility(View.VISIBLE);
-                holder.textViewLineColor5.setText(color);
-                holder.textViewLineColor5.setTextColor(Color.WHITE);
-                holder.textViewLineColor5.setBackgroundColor(getColorInt(color));
-            }
-            else if(i == 5)
-            {
-                holder.textViewLineColor6.setVisibility(View.VISIBLE);
-                holder.textViewLineColor6.setText(color);
-                holder.textViewLineColor6.setTextColor(Color.WHITE);
-                holder.textViewLineColor6.setBackgroundColor(getColorInt(color));
-            }
+            Log.d("lineColors", StopsAPI.lineColors.get(stationName).toString());
         }
-        Log.d("lineColors", StopsAPI.lineColors.get(stationName).toString());
     }
 
 
