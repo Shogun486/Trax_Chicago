@@ -61,9 +61,14 @@ public class NumbersViewAdapter extends ArrayAdapter<NumbersView>
             {
                 TextView textViewColor1List = currentItemView.findViewById(R.id.textViewColor1List);
                 textViewColor1List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0)));
-                textViewColor1List.setText(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0));
+                textViewColor1List.setText("                         ");
                 textViewColor1List.setVisibility(View.VISIBLE);
-            }
+
+                TextView textViewColor2List = currentItemView.findViewById(R.id.textViewColor2List);
+                textViewColor2List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0)));
+                textViewColor2List.setText("                         ");
+
+            }/*
             if(i == 1)
             {
                 TextView textViewColor2List = currentItemView.findViewById(R.id.textViewColor2List);
@@ -87,7 +92,7 @@ public class NumbersViewAdapter extends ArrayAdapter<NumbersView>
                 textViewColor4List.setText(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(3));
                 textViewColor4List.setVisibility(View.VISIBLE);
 
-            }
+            }*/
         }
 
 

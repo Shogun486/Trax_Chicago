@@ -19,82 +19,46 @@
             android:id="@+id/textView1List"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:fontFamily="@font/readex_pro_bold"
+            android:scrollbars="vertical"
             android:text="stop"
+            android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:layout_marginStart="5dp"
+            android:verticalScrollbarPosition="right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewColor1List"
             android:textColor="#FFFFFF"
-
             android:padding="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="2dp"
             android:textSize="20sp"
             android:fontFamily="@font/readex_pro_bold"
             android:scaleType="fitXY"
-            android:text="color"
             android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
+            app:layout_constraintEnd_toStartOf="@+id/textView1List"
+            app:layout_constraintTop_toTopOf="@+id/textView1List"
+            app:layout_constraintBottom_toBottomOf="@+id/textView1List"/>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/textViewColor2List"
             android:textColor="#FFFFFF"
-
             android:padding="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="2dp"
             android:textSize="20sp"
             android:fontFamily="@font/readex_pro_bold"
             android:scaleType="fitXY"
-            android:text="color"
             android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@+id/textViewColor1List"
-            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
-
-
-        <TextView
-            android:visibility="gone"
-
-            android:id="@+id/textViewColor3List"
-            android:textColor="#FFFFFF"
-
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:fontFamily="@font/readex_pro_bold"
-            android:scaleType="fitXY"
-            android:text="color"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@+id/textViewColor2List"
-            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
-
-        <TextView
-            android:visibility="gone"
-
-            android:id="@+id/textViewColor4List"
-            android:textColor="#FFFFFF"
-
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:fontFamily="@font/readex_pro_bold"
-            android:scaleType="fitXY"
-            android:text="color"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@+id/textViewColor3List"
-            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
+            app:layout_constraintStart_toEndOf="@+id/textView1List"
+            app:layout_constraintTop_toTopOf="@+id/textView1List"
+            app:layout_constraintBottom_toBottomOf="@+id/textView1List"/>
 
         <ImageView
             android:id="@+id/imageViewEntrySeparator"
@@ -106,7 +70,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewColor1List"
+            app:layout_constraintTop_toBottomOf="@+id/textView1List"
             app:srcCompat="@drawable/separator" />
 
 
