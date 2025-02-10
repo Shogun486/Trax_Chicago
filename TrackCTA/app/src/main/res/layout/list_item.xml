@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    tools:ignore="UselessParent"
-    >
+    tools:ignore="UselessParent">
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
@@ -20,16 +19,98 @@
             android:id="@+id/textView1List"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/readex_pro_bold"
-            android:textAlignment="center"
-            android:textColor="@color/white"
+            android:text="stop"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:ignore="RtlHardcoded" />
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/textViewColor1List"
+            android:textColor="#FFFFFF"
+
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:fontFamily="@font/readex_pro_bold"
+            android:scaleType="fitXY"
+            android:text="color"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/textViewColor2List"
+            android:textColor="#FFFFFF"
+
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:fontFamily="@font/readex_pro_bold"
+            android:scaleType="fitXY"
+            android:text="color"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/textViewColor1List"
+            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
+
+
+        <TextView
+            android:visibility="gone"
+
+            android:id="@+id/textViewColor3List"
+            android:textColor="#FFFFFF"
+
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:fontFamily="@font/readex_pro_bold"
+            android:scaleType="fitXY"
+            android:text="color"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/textViewColor2List"
+            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
+
+        <TextView
+            android:visibility="gone"
+
+            android:id="@+id/textViewColor4List"
+            android:textColor="#FFFFFF"
+
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:fontFamily="@font/readex_pro_bold"
+            android:scaleType="fitXY"
+            android:text="color"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/textViewColor3List"
+            app:layout_constraintTop_toBottomOf="@+id/textView1List"/>
+
+        <ImageView
+            android:id="@+id/imageViewEntrySeparator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:visibility="visible"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewColor1List"
+            app:srcCompat="@drawable/separator" />
 
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

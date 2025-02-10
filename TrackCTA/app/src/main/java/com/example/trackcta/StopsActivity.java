@@ -32,28 +32,31 @@ public class StopsActivity extends AppCompatActivity
         final ArrayList<NumbersView> arrayList = new ArrayList<NumbersView>();
 
         // display all: belmont(kimball-linden), Arrival
+        int max = 0;
         for(String station: StopsAPI.stationToStops.keySet())
         {
             for(String stop: new HashSet<String>(StopsAPI.stationToStops.get(station)))
             {
+                max = Math.max(StopsAPI.stopToColors.get(stop).size(), max);
                 String boundTest =  parseDestinationBound(stop);
                 Log.d("boundTest", String.valueOf(station  + " --> "+ stop + " --> " + boundTest));
             }
         }
 
         //display all
-
         for(String stop: new HashSet<String>(stops))
         {
             String stopID = StopsAPI.stopIDs.get(stop);
             String bound = parseDestinationBound(stop);
             Log.d("bound", bound);
 
-            arrayList.add(new NumbersView(R.drawable.train, bound, stopID));
+            arrayList.add(new NumbersView(R.drawable.train, stop, stopID));
+
             Log.d("stopColors", StopsAPI.stopToColors.get(stop).toString());
 
         }
 
+Log.d("colorMax", String.valueOf(max));
         // create a arraylist of the type NumbersView
 
         // add all the values from 1 to 15 to the arrayList
@@ -100,7 +103,7 @@ public class StopsActivity extends AppCompatActivity
         numbersListView.setAdapter(numbersArrayAdapter);
     }
 
-    private String parseDestinationBound(String stop)
+    public static String parseDestinationBound(String stop)
     {
         String [] stopDestInfo = stop.split(" [(]");
         String bound = "";
