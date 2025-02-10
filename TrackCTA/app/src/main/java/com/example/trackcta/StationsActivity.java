@@ -26,9 +26,9 @@ import java.util.Map;
 
 public class StationsActivity extends AppCompatActivity
 {
-    private static List<String> stops = new ArrayList<>();
+    public static List<String> stops = new ArrayList<>();
     private static Map<String, String> stopColors = new HashMap<>();
-    private static List <Integer> ids = new ArrayList<>();
+    public static List <Integer> ids = new ArrayList<>();
     private static int differenceInHours, differenceInMinutes, differenceInSeconds;
     protected RecyclerView recyclerViewMain;
     protected static ArrayList<String> al = new ArrayList<>();

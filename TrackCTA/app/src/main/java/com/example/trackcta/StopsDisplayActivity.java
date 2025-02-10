@@ -36,7 +36,7 @@ public class StopsDisplayActivity extends AppCompatActivity
         stopsList = findViewById(R.id.stopsList);
 
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, MainActivity.stops)
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, StationsActivity.stops)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -56,7 +56,7 @@ public class StopsDisplayActivity extends AppCompatActivity
                 //String stationName =((TextView)view).getText().toString();
                 Log.d("INDEX", String.valueOf(position));
                 Intent intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
-                intent.putExtra("ID", MainActivity.ids.get(position));
+                intent.putExtra("ID", StationsActivity.ids.get(position));
                 //intent.putExtra("stationName", ((TextView)view).getText().toString());
                 startActivity(intent);
 
