@@ -1,5 +1,6 @@
 package com.example.trackcta;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,17 +43,19 @@ public class NumbersViewAdapter extends ArrayAdapter<NumbersView>
         NumbersView currentNumberPosition = getItem(position);
 
         // then according to the position of the view assign the desired image for the same
-        ImageView numbersImage = currentItemView.findViewById(R.id.imageViewList);
+        //ImageView numbersImage = currentItemView.findViewById(R.id.imageViewList);
         assert currentNumberPosition != null;
-        numbersImage.setImageResource(currentNumberPosition.getNumbersImageId());
+        //numbersImage.setImageResource(currentNumberPosition.getNumbersImageId());
 
         // then according to the position of the view assign the desired TextView 1 for the same
         TextView textView1 = currentItemView.findViewById(R.id.textView1List);
         textView1.setText(currentNumberPosition.getNumberInDigit());
+        //textView1.setBackgroundColor(Color.rgb(84,84,84));
+        //textView1.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0)));
 
         // then according to the position of the view assign the desired TextView 2 for the same
-        TextView textView2 = currentItemView.findViewById(R.id.textView2List);
-        textView2.setText(currentNumberPosition.getNumbersInText());
+        //TextView textView2 = currentItemView.findViewById(R.id.textView2List);
+        //textView2.setText(currentNumberPosition.getNumbersInText());
 
         // then return the recyclable view
         return currentItemView;

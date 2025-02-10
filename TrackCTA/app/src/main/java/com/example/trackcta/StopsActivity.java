@@ -9,6 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.example.trackcta.NumbersViewAdapter;
 
 public class StopsActivity extends AppCompatActivity
@@ -25,10 +31,26 @@ public class StopsActivity extends AppCompatActivity
 
         final ArrayList<NumbersView> arrayList = new ArrayList<NumbersView>();
 
-        for(String stop: stops)
+        // display all: belmont(kimball-linden), Arrival
+        for(String station: StopsAPI.stationToStops.keySet())
+        {
+            for(String stop: new HashSet<String>(StopsAPI.stationToStops.get(station)))
+            {
+                String boundTest =  parseDestinationBound(stop);
+                Log.d("boundTest", String.valueOf(station  + " --> "+ stop + " --> " + boundTest));
+            }
+        }
+
+        //display all
+
+        for(String stop: new HashSet<String>(stops))
         {
             String stopID = StopsAPI.stopIDs.get(stop);
-            arrayList.add(new NumbersView(R.drawable.train, stop, stopID));
+            String bound = parseDestinationBound(stop);
+            Log.d("bound", bound);
+
+            arrayList.add(new NumbersView(R.drawable.train, bound, stopID));
+            Log.d("stopColors", StopsAPI.stopToColors.get(stop).toString());
 
         }
 
@@ -76,6 +98,55 @@ public class StopsActivity extends AppCompatActivity
 
         // set the numbersViewAdapter for ListView
         numbersListView.setAdapter(numbersArrayAdapter);
+    }
+
+    private String parseDestinationBound(String stop)
+    {
+        String [] stopDestInfo = stop.split(" [(]");
+        String bound = "";
+        for(String info: stopDestInfo)
+        {
+            if(info.contains("Inner Loop"))
+            {
+                return "Inner Loop";
+            }
+            else if(info.contains("Outer Loop"))
+            {
+                return "Outer Loop";
+            }
+            else if(info.contains("bound") || info.contains("Bound"))
+            {
+                info = info.substring(0, info.length() - 1);
+                bound = info.split("-")[0];
+                String [] infoArr = info.split("-");
+
+                if(bound.equals("Forest Pk"))
+                    return "Forest Park";
+
+                String format = "";
+                for(int i = 0; i < infoArr.length - 1; i++)
+                {
+                    format += infoArr[i];
+
+                    if(i == infoArr.length - 2) {
+                        continue;
+                    }
+                    format += "-";
+                }
+                return format;
+            }
+            else if(info.contains("arrival") || info.contains("Arrival"))
+            {
+                info = info.substring(0, info.length() - 1);
+                bound = info.split(" ")[0];
+                return bound;
+
+            }
+
+
+        }
+
+        return bound;
     }
 
 

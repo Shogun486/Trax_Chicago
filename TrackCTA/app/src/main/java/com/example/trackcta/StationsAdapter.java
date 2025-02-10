@@ -117,7 +117,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
     }
 
 
-   private int getColorInt(String color)
+   public static int getColorInt(String color)
    {
        if(color.equals("Red"))
        {
