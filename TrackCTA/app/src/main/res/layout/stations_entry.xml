@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:onClick="onClick">
 
     <TextView
@@ -11,12 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+
         android:fontFamily="@font/readex_pro_bold"
         android:text="station"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginStart="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
          />
@@ -24,91 +26,110 @@
     <TextView
         android:visibility="gone"
         android:id="@+id/textViewLineColor1"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+
+        android:layout_marginStart="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:textColor="#000000"
+
+
         android:fontFamily="@font/readex_pro_bold"
-        android:scaleType="fitXY"
-        android:text="color"
-        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainStationName"/>
 
     <TextView
         android:visibility="gone"
-
         android:id="@+id/textViewLineColor2"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textColor="#000000"
+
+        android:padding="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="12sp"
+
         android:fontFamily="@font/readex_pro_bold"
-        android:scaleType="fitXY"
-        android:text="color"
-        android:textAlignment="center"
         app:layout_constraintStart_toEndOf="@+id/textViewLineColor1"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainStationName"/>
 
     <TextView
         android:visibility="gone"
-
         android:id="@+id/textViewLineColor3"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:padding="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="12sp"
         android:fontFamily="@font/readex_pro_bold"
-        android:scaleType="fitXY"
-        android:text="color"
-        android:textAlignment="center"
+        android:textColor="#000000"
+
         app:layout_constraintStart_toEndOf="@+id/textViewLineColor2"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainStationName"/>
 
     <TextView
         android:visibility="gone"
-
         android:id="@+id/textViewLineColor4"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textColor="#000000"
+
+        android:padding="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="12sp"
         android:fontFamily="@font/readex_pro_bold"
-        android:scaleType="fitXY"
-        android:text="color"
-        android:textAlignment="center"
+
         app:layout_constraintStart_toEndOf="@+id/textViewLineColor3"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainStationName"/>
 
     <TextView
         android:visibility="gone"
-
         android:id="@+id/textViewLineColor5"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textColor="#000000"
+
+        android:padding="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="12sp"
         android:fontFamily="@font/readex_pro_bold"
-        android:scaleType="fitXY"
-        android:text="color"
-        android:textAlignment="center"
+
         app:layout_constraintStart_toEndOf="@+id/textViewLineColor4"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainStationName"/>
 
     <TextView
         android:visibility="gone"
-
         android:id="@+id/textViewLineColor6"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textColor="#000000"
+
+        android:padding="8dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle"
+        android:gravity="center"
+        android:textSize="12sp"
         android:fontFamily="@font/readex_pro_bold"
-        android:scaleType="fitXY"
-        android:text="color"
-        android:textAlignment="center"
+
         app:layout_constraintStart_toEndOf="@+id/textViewLineColor5"
         app:layout_constraintTop_toBottomOf="@+id/textViewMainStationName"/>
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/arrow"
+        android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imageViewEntrySeparator"
+        android:layout_marginEnd="10dp"
+        />
 
     <ImageView
         android:id="@+id/imageViewEntrySeparator"

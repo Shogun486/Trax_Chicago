@@ -1,6 +1,7 @@
 package com.example.trackcta;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,8 +52,12 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
     public void onBindViewHolder(@NonNull StationsViewHolder holder, int position) {
         //info = al.get(position);
         String stationName = al.get(position);
+        String display = stationName;
 
-        holder.textViewMainStationName.setText(stationName);
+        if(stationName.contains("Harold Washington"))
+            display = "Harold Washington Library\n(State/Van Buren)";
+
+        holder.textViewMainStationName.setText(display);
         holder.textViewLineColor1.setVisibility(View.GONE);
         holder.textViewLineColor2.setVisibility(View.GONE);
         holder.textViewLineColor3.setVisibility(View.GONE);
@@ -78,38 +83,33 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
             }
 
             ArrayList<String> temp = new ArrayList<>(colors);
+            GradientDrawable gd;
             for (int i = 0; i < temp.size(); i++) {
                 String color = temp.get(i);
                 if (i == 0) {
                     holder.textViewLineColor1.setVisibility(View.VISIBLE);
-                    holder.textViewLineColor1.setText(color);
-                    holder.textViewLineColor1.setTextColor(Color.WHITE);
-                    holder.textViewLineColor1.setBackgroundColor(getColorInt(color));
+                    gd = (GradientDrawable) holder.textViewLineColor1.getBackground().mutate();
+                    gd.setColor(getColorInt(color));
                 } else if (i == 1) {
                     holder.textViewLineColor2.setVisibility(View.VISIBLE);
-                    holder.textViewLineColor2.setText(color);
-                    holder.textViewLineColor2.setTextColor(Color.WHITE);
-                    holder.textViewLineColor2.setBackgroundColor(getColorInt(color));
+                    gd = (GradientDrawable) holder.textViewLineColor2.getBackground().mutate();
+                    gd.setColor(getColorInt(color));
                 } else if (i == 2) {
                     holder.textViewLineColor3.setVisibility(View.VISIBLE);
-                    holder.textViewLineColor3.setText(color);
-                    holder.textViewLineColor3.setTextColor(Color.WHITE);
-                    holder.textViewLineColor3.setBackgroundColor(getColorInt(color));
+                    gd = (GradientDrawable) holder.textViewLineColor3.getBackground().mutate();
+                    gd.setColor(getColorInt(color));
                 } else if (i == 3) {
                     holder.textViewLineColor4.setVisibility(View.VISIBLE);
-                    holder.textViewLineColor4.setText(color);
-                    holder.textViewLineColor4.setTextColor(Color.WHITE);
-                    holder.textViewLineColor4.setBackgroundColor(getColorInt(color));
+                    gd = (GradientDrawable) holder.textViewLineColor4.getBackground().mutate();
+                    gd.setColor(getColorInt(color));
                 } else if (i == 4) {
                     holder.textViewLineColor5.setVisibility(View.VISIBLE);
-                    holder.textViewLineColor5.setText(color);
-                    holder.textViewLineColor5.setTextColor(Color.WHITE);
-                    holder.textViewLineColor5.setBackgroundColor(getColorInt(color));
+                    gd = (GradientDrawable) holder.textViewLineColor5.getBackground().mutate();
+                    gd.setColor(getColorInt(color));
                 } else if (i == 5) {
                     holder.textViewLineColor6.setVisibility(View.VISIBLE);
-                    holder.textViewLineColor6.setText(color);
-                    holder.textViewLineColor6.setTextColor(Color.WHITE);
-                    holder.textViewLineColor6.setBackgroundColor(getColorInt(color));
+                    gd = (GradientDrawable) holder.textViewLineColor6.getBackground().mutate();
+                    gd.setColor(getColorInt(color));
                 }
             }
             Log.d("lineColors", StopsAPI.lineColors.get(stationName).toString());
