@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     tools:ignore="UselessParent">
@@ -11,9 +11,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:backgroundTint="@color/black">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView1List"
@@ -24,54 +24,80 @@
             android:text="stop"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="28sp"
+            android:textSize="35sp"
             android:textStyle="bold"
             android:verticalScrollbarPosition="right"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/textViewColor1List"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:fontFamily="@font/readex_pro_bold"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewColor1List"
-            android:textColor="#FFFFFF"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:textSize="20sp"
+            android:id="@+id/textViewColor2List"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
             android:fontFamily="@font/readex_pro_bold"
+            android:padding="5dp"
             android:scaleType="fitXY"
             android:textAlignment="center"
-            app:layout_constraintEnd_toStartOf="@+id/textView1List"
-            app:layout_constraintTop_toTopOf="@+id/textView1List"
-            app:layout_constraintBottom_toBottomOf="@+id/textView1List"/>
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewColor1List" />
 
         <TextView
-            android:id="@+id/textViewColor2List"
-            android:textColor="#FFFFFF"
-            android:padding="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="2dp"
-            android:textSize="20sp"
+            android:id="@+id/textViewColor3List"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
             android:fontFamily="@font/readex_pro_bold"
+            android:padding="5dp"
             android:scaleType="fitXY"
             android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@+id/textView1List"
-            app:layout_constraintTop_toTopOf="@+id/textView1List"
-            app:layout_constraintBottom_toBottomOf="@+id/textView1List"/>
-
-        <ImageView
-            android:id="@+id/imageViewEntrySeparator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:visibility="visible"
-            android:layout_marginTop="20dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView1List"
-            app:srcCompat="@drawable/separator" />
+            app:layout_constraintTop_toBottomOf="@id/textViewColor2List" />
+
+        <TextView
+            android:id="@+id/textViewColor4List"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:fontFamily="@font/readex_pro_bold"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewColor3List" />
+
+
 
 
 

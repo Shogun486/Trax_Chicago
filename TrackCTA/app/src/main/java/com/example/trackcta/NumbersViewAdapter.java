@@ -17,6 +17,7 @@ import com.example.trackcta.NumbersView;
 
 import java.util.ArrayList;
 
+//harlem & western stations have stops dup
 public class NumbersViewAdapter extends ArrayAdapter<NumbersView>
 {
 
@@ -48,51 +49,53 @@ public class NumbersViewAdapter extends ArrayAdapter<NumbersView>
         assert currentNumberPosition != null;
         //numbersImage.setImageResource(currentNumberPosition.getNumbersImageId());
 
+
         // then according to the position of the view assign the desired TextView 1 for the same
         TextView textView1 = currentItemView.findViewById(R.id.textView1List);
-        textView1.setText(StopsActivity.parseDestinationBound(currentNumberPosition.getNumberInDigit()));
+        textView1.setText(currentNumberPosition.getNumberInDigit());
+
+
+
         //textView1.setBackgroundColor(Color.rgb(84,84,84));
         //textView1.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0)));
 
-        int colorAmount = (StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).size());
+        int colorAmount = StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(currentNumberPosition.getNumberInDigit())).size();
+       //og int colorAmount = (StopsAPI.stopToColors.get(currentNumberPosition.getNumbersInText()).size());
         for(int i = 0; i < colorAmount; i++)
         {
             if(i == 0)
             {
                 TextView textViewColor1List = currentItemView.findViewById(R.id.textViewColor1List);
-                textViewColor1List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0)));
+                textViewColor1List.setBackgroundColor(StationsAdapter.getColorInt( StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(currentNumberPosition.getNumberInDigit())).get(0)));
                 textViewColor1List.setText("                         ");
-                textViewColor1List.setVisibility(View.VISIBLE);
 
-                TextView textViewColor2List = currentItemView.findViewById(R.id.textViewColor2List);
-                textViewColor2List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(0)));
-                textViewColor2List.setText("                         ");
 
-            }/*
+            }
             if(i == 1)
             {
                 TextView textViewColor2List = currentItemView.findViewById(R.id.textViewColor2List);
-                textViewColor2List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(1)));
-                textViewColor2List.setText(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(1));
+                textViewColor2List.setBackgroundColor(StationsAdapter.getColorInt( StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(currentNumberPosition.getNumberInDigit())).get(1)));
+                textViewColor2List.setText("                         ");
                 textViewColor2List.setVisibility(View.VISIBLE);
 
             }
+
             if(i == 2)
             {
                 TextView textViewColor3List = currentItemView.findViewById(R.id.textViewColor3List);
-                textViewColor3List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(2)));
-                textViewColor3List.setText(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(2));
+                textViewColor3List.setBackgroundColor(StationsAdapter.getColorInt( StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(currentNumberPosition.getNumberInDigit())).get(2)));
+                textViewColor3List.setText("                         ");
                 textViewColor3List.setVisibility(View.VISIBLE);
 
             }
             if(i == 3)
             {
                 TextView textViewColor4List = currentItemView.findViewById(R.id.textViewColor4List);
-                textViewColor4List.setBackgroundColor(StationsAdapter.getColorInt(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(3)));
-                textViewColor4List.setText(StopsAPI.stopToColors.get(currentNumberPosition.getNumberInDigit()).get(3));
+                textViewColor4List.setBackgroundColor(StationsAdapter.getColorInt( StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(currentNumberPosition.getNumberInDigit())).get(3)));
+                textViewColor4List.setText("                         ");
                 textViewColor4List.setVisibility(View.VISIBLE);
 
-            }*/
+            }
         }
 
 

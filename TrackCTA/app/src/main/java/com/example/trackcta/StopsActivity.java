@@ -35,24 +35,55 @@ public class StopsActivity extends AppCompatActivity
         int max = 0;
         for(String station: StopsAPI.stationToStops.keySet())
         {
-            for(String stop: new HashSet<String>(StopsAPI.stationToStops.get(station)))
+            for(String stop: StopsAPI.stationToStops.get(station))
             {
-                max = Math.max(StopsAPI.stopToColors.get(stop).size(), max);
-                String boundTest =  parseDestinationBound(stop);
-                Log.d("boundTest", String.valueOf(station  + " --> "+ stop + " --> " + boundTest));
+                //max = Math.max(StopsAPI.stopToColors.get(stop).size(), max);
+                int len = station.length();
+                if(stop.contains("H.W. Library"))
+                {
+                    String s = "H.W. Library";
+                    len = s.length();
+                }
+                else if (stop.contains("South Blvd"))
+                {
+                    String s = "South Blvd";
+                    len = s.length();
+                }
+                else if (stop.contains("35-Bronzeville-IIT"))
+                {
+                    String s = "35-Bronzeville-IIT";
+                    len = s.length();
+                }
+                else if(!stop.contains(station))
+                {
+                    len = 0;
+
+                }
+                else {
+                    String temp = stop.substring(len, stop.length());
+                    if(temp.charAt(0) == ('/'))
+                    {
+                       int length = temp.split(" ")[0].length();
+                       len += length;
+
+                    }
+
+                }
+                String display = stop.substring(len, stop.length());
+                Log.d("allStops", station + "---->" + display);
             }
         }
 
         //display all
-        for(String stop: new HashSet<String>(stops))
+        for(String stop: stops)
         {
             String stopID = StopsAPI.stopIDs.get(stop);
-            String bound = parseDestinationBound(stop);
-            Log.d("bound", bound);
+            //String bound = parseDestinationBound(stop);
+            //Log.d("bound", bound);
 
             arrayList.add(new NumbersView(R.drawable.train, stop, stopID));
 
-            Log.d("stopColors", StopsAPI.stopToColors.get(stop).toString());
+            //Log.d("stopColors", StopsAPI.stopToColors.get(stop).toString());
 
         }
 
@@ -105,6 +136,17 @@ Log.d("colorMax", String.valueOf(max));
 
     public static String parseDestinationBound(String stop)
     {
+        if(stop.equals("Harlem (Forest Pk Branch) (O'Hare-bound)"))
+        {//|| stop.equals("Harlem (O'Hare Branch) (O'Hare-bound)")) {
+            return "O'Hare\n(Forest Park Branch)";
+
+        }
+        else if (stop.equals("Harlem (O'Hare Branch) (O'Hare-bound)"))
+        {
+            return "O'Hare\n(O'Hare Branch)";
+        }
+
+
         String [] stopDestInfo = stop.split(" [(]");
         String bound = "";
         for(String info: stopDestInfo)

@@ -72,7 +72,7 @@ public class StationsActivity extends AppCompatActivity
         stops.clear();
         stopColors.clear();
         ids.clear();
-
+/*
         for(String stop: StopsAPI.stationToStops.get(stationName))
         {
             // Separate ID numbers and stop_names into different Lists
@@ -84,7 +84,7 @@ public class StationsActivity extends AppCompatActivity
                 //stopColors.put(info, StopsAPI.get);
             }
         }
-
+*/
         Intent intent = new Intent(this, StopsActivity.class);
         intent.putExtra("stationName", stationName);
         startActivity(intent);

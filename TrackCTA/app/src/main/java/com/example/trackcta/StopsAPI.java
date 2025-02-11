@@ -58,6 +58,7 @@ public class StopsAPI
                         String stationName = info.getString("station_name");
                         String stopName = info.getString("stop_name");
                         String stopID = info.getString("stop_id");
+                        String descName = info.getString("station_descriptive_name");
 
                         //stopsColors
                         if(!stationToStops.containsKey(stationName)) {
@@ -67,57 +68,61 @@ public class StopsAPI
 
                         }
 
-                        stationToStops.get(stationName).add(stopName);
+                        stationToStops.get(stationName).add(stopName + descName);
                         //stopIDs.add(stopID);
 
 
-                        if(!stopToColors.containsKey(stopName))
+                        if(!stopToColors.containsKey(stopID))
                         {
-                            stopIDs.put(stopName, stopID);
-                            stopToColors.put(stopName, new ArrayList<>());
+                            stopIDs.put(stopName + descName, stopID);
+                            stopToColors.put(stopID, new ArrayList<>());
+
+                            if(stopName.equals("Sheridan (Loop-bound)") || stopName.equals("Sheridan (Howard-Linden-bound)"))
+                                stopToColors.get(stopID).add("Red");
+
                             if(info.getBoolean("red") == true)
                             {
-                                stopToColors.get(stopName).add("Red");
+                                stopToColors.get(stopID).add("Red");
                             }
                             if(info.getBoolean("blue") == true)
                             {
-                                stopToColors.get(stopName).add("Blue");
+                                stopToColors.get(stopID).add("Blue");
 
 
                             }
                             if(info.getBoolean("g") == true)
                             {
-                                stopToColors.get(stopName).add("Green");
+                                stopToColors.get(stopID).add("Green");
 
 
                             }
                             if(info.getBoolean("brn") == true)
                             {
-                                stopToColors.get(stopName).add("Brown");
+                                stopToColors.get(stopID).add("Brown");
 
 
                             }
                             if(info.getBoolean("p") == true || info.getBoolean("pexp") == true)
                             {
-                                stopToColors.get(stopName).add("Purple");
+                                stopToColors.get(stopID).add("Purple");
 
 
                             }
                             if(info.getBoolean("y") == true)
                             {
-                                stopToColors.get(stopName).add("Yellow");
+                                stopToColors.get(stopID).add("Yellow");
 
 
                             }
                             if(info.getBoolean("pnk") == true)
                             {
-                                stopToColors.get(stopName).add("Pink");
+                                stopToColors.get(stopID).add("Pink");
 
 
                             }
                             if(info.getBoolean("o") == true)
                             {
-                                stopToColors.get(stopName).add("Orange");
+                                stopToColors.get(stopID).add("Orange");
                             }
                         }
 

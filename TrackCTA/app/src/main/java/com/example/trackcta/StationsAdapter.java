@@ -75,7 +75,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
             Log.d("INSIDE", "");
             for (String stop : stops)
             {
-                for (String color : StopsAPI.stopToColors.get(stop)) {
+                for (String color : StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(stop))) {
                     if (!colors.contains(color))
                         colors.add(color);
 
