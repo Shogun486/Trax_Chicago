@@ -25,6 +25,7 @@ public class ArrivalsAPI
     private static RequestQueue queue;
     private static ArrivalsActivity arrivalsActivity;
     private static int run;
+    private static String runColor;
 
 
     public static void call(ArrivalsActivity arrivalsActivity, int id)
@@ -50,7 +51,27 @@ public class ArrivalsAPI
                         Log.d("etaInfo", etaInfo.toString());
                         arrivalTime = etaInfo.getString("arrT");
                         run = etaInfo.getInt("rn");
-                        ArrivalsInfo info = new ArrivalsInfo(arrivalTime, run);
+                        runColor = etaInfo.getString("rt");
+
+                        //Org, Blue, G, Brn, Pink, P
+                        if(runColor.equals("Org"))
+                        {
+                            runColor = "Orange";
+                        }
+                        else if(runColor.equals("G"))
+                        {
+                            runColor = "Green";
+                        }
+                        else if(runColor.equals("Brn"))
+                        {
+                            runColor = "Brown";
+                        }
+                        else if(runColor.equals("P"))
+                        {
+                            runColor = "Purple";
+                        }
+
+                        ArrivalsInfo info = new ArrivalsInfo(arrivalTime, run, runColor);
                         arrivalsActivity.alt.add(info);
                     }
                     ArrivalsAdapter ap = new ArrivalsAdapter(arrivalsActivity, arrivalsActivity.alt);

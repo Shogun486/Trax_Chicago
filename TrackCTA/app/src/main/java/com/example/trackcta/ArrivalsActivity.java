@@ -2,6 +2,9 @@ package com.example.trackcta;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.PersistableBundle;
@@ -31,7 +34,14 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_arrivals);
 
         intent = getIntent();
-        String stopID = intent.getStringExtra("stopID");
+        String stopID = intent.getStringExtra("stopID"),
+               stopName = intent.getStringExtra("stopName"),
+               stationName = intent.getStringExtra("stationName");
+
+        getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+        getSupportActionBar().setTitle(stopName + " (" + stationName + ")");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+
         ID= -1;
         try {
             ID = Integer.parseInt(stopID);

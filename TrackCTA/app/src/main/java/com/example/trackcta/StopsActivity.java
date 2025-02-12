@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class StopsActivity extends AppCompatActivity
@@ -30,6 +32,9 @@ public class StopsActivity extends AppCompatActivity
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getSupportActionBar().setTitle(stationName);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+
+        String showTitle = getSupportActionBar().getTitle().toString();
+        Log.d("showTitle", showTitle);
 
         ArrayList <String> stopIDs = StopsAPI.stationToStopIDs.get(stationName);
 
@@ -148,14 +153,72 @@ public class StopsActivity extends AppCompatActivity
                 String t = o.getNumberInDigit();
                 Log.d("listclick", t);
 
+
                 Intent intent = new Intent(getApplicationContext(), ArrivalsActivity.class);
                 intent.putExtra("stopID", s);
+                intent.putExtra("stopName", getProperStopDisplay(t));
+                intent.putExtra("stationName", showTitle);
+
                 startActivity(intent);
             }
         });
 
         // set the numbersViewAdapter for ListView
         numbersListView.setAdapter(numbersArrayAdapter);
+    }
+
+    public String getProperStopDisplay(String text)
+    {
+        StringBuilder sb = new StringBuilder(text);
+        String park = "", bound = "";
+        for(int i = 0; i < sb.length(); i++)
+        {
+            park += sb.charAt(i);
+            Log.d("park", park);
+            if(park.contains("Pk"))
+            {
+                sb.replace(i-2,i+1," Park");
+                park = "";
+            }
+
+            bound += sb.charAt(i);
+            if(bound.contains("bound")) {
+                sb.delete(i - 5, i + 1);
+                sb.deleteCharAt(sb.length() - 1);
+                break;
+            }
+
+            if(i+1 != sb.length())
+            {
+                if (sb.charAt(i + 1) == '(')
+                {
+
+                    sb.setCharAt(i, 'X');
+                    sb.deleteCharAt(i + 1);
+
+                }
+                else if(sb.charAt(i + 1) == ')')
+                {
+                    sb.deleteCharAt(i+1);
+                }
+            }
+        }
+
+        text = "";
+        String j = sb.toString();
+        String [] arr = j.split("X");
+        for(int c  = 0; c < arr.length; c++)
+        {
+            if(c == arr.length - 1 && arr.length != 2)
+                text += "\nTo ";
+            if(c != 0)
+                text += arr[c];
+
+
+        }
+        //text = sb.toString();
+        //textView1.setText(text);
+        return text;
     }
 
     public String parseDisplay(String display)

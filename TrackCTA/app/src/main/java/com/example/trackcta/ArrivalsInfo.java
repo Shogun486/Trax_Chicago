@@ -6,12 +6,14 @@ public class ArrivalsInfo implements Serializable
 {
     private String arrivalTime;
     private int run;
+    private String runColor;
 
 
-    public ArrivalsInfo(String arrivalTime, int run)
+    public ArrivalsInfo(String arrivalTime, int run, String runColor)
     {
         this.arrivalTime = arrivalTime;
         this.run = run;
+        this.runColor = runColor;
     }
 
 
@@ -19,4 +21,8 @@ public class ArrivalsInfo implements Serializable
 
 
     public int getRun() { return run; }
+
+    public String getRunColor() {
+        return runColor;
+    }
 }

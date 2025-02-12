@@ -60,6 +60,7 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
         String arrivalTime = info.getArrivalTime().split("T")[1];
         minutesDisplay += StationsActivity.getTimeDifference(currentTime, arrivalTime);
         holder.textViewArrivalTime.setText(minutesDisplay);
+        holder.textViewRunColor.setBackgroundColor(StationsAdapter.getColorInt(info.getRunColor()));
     }
 
 
