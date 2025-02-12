@@ -66,9 +66,12 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view)
     {
         ArrivalsInfo info = alt.get(recyclerView.getChildLayoutPosition(view));
+        String showTitle = getSupportActionBar().getTitle().toString();
+
         Intent intent = new Intent(this, VisualizerActivity.class);
         intent.putExtra("RUN", info.getRun());
         intent.putExtra("ARRIVAL", info.getArrivalTime());
+        intent.putExtra("stopName", showTitle);
         startActivity(intent);
     }
 

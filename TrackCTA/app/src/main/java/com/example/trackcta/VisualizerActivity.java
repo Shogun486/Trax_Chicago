@@ -1,5 +1,7 @@
 package com.example.trackcta;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -27,6 +29,8 @@ public class VisualizerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visualizer_activity);
 
+
+
         imageViewTrain = findViewById(R.id.imageViewTrain);
         textView = findViewById(R.id.textView);
         imageViewS1 = findViewById(R.id.imageViewS1);
@@ -39,8 +43,12 @@ public class VisualizerActivity extends AppCompatActivity
         imageViewS8 = findViewById(R.id.imageViewS8);
 
         Intent intent = getIntent();
-
         int run = intent.getIntExtra("RUN", -1);
+        String stopName = intent.getStringExtra("stopName");
+
+        getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+        getSupportActionBar().setTitle("RUN# " + run + " - " + stopName);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         // Arrival Time (military)
         String arrivalTime = intent.getStringExtra("ARRIVAL").split("T")[1];
@@ -54,13 +62,13 @@ public class VisualizerActivity extends AppCompatActivity
         if(StationsActivity.hourWait())
             seconds += 3600;
 
-        Log.d("SECONDS", String.valueOf(seconds));
+        Log.d("SECONDS", String.valueOf(seconds * 1000));
 
 
         //test countdown
-        seconds = 37051;
+        seconds *= 1000;
         // if(seconds < 8) no point in tracking
-        int eighth = seconds / 8;
+        int eighth = (seconds) / 8;
         Log.d("eighth", String.valueOf(eighth));
         int countDownInterval = 1000;
         imageViewTrain.setImageResource(R.drawable.train);
