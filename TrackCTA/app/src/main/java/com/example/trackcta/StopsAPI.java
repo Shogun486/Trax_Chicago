@@ -28,9 +28,9 @@ public class StopsAPI
     private StationsActivity mainActivity;
     protected static Map <String, Set<String>> lineColors = new HashMap<>();
     //private static Map <String, List<String>> stationInfo = new HashMap<>();
-    protected static Map<String, ArrayList<String>> stationToStops = new HashMap<>();
-    protected static Map<String, List<String>> stopToColors = new HashMap<>();
-    protected static Map<String, String> stopIDs = new HashMap<>();
+    protected static Map<String, ArrayList<String>> stationToStopIDs = new HashMap<>();
+    protected static Map<String, List<String>> stopIDtoColors = new HashMap<>();
+    protected static Map<String, String> stopIDtoName = new HashMap<>();
 
 
 
@@ -61,68 +61,68 @@ public class StopsAPI
                         String descName = info.getString("station_descriptive_name");
 
                         //stopsColors
-                        if(!stationToStops.containsKey(stationName)) {
-                            stationToStops.put(stationName, new ArrayList<>());
+                        if(!stationToStopIDs.containsKey(stationName)) {
+                            stationToStopIDs.put(stationName, new ArrayList<>());
 
                             mainActivity.al.add(stationName);
 
                         }
 
-                        stationToStops.get(stationName).add(stopName + descName);
+                        stationToStopIDs.get(stationName).add(stopID);
                         //stopIDs.add(stopID);
 
 
-                        if(!stopToColors.containsKey(stopID))
+                        if(!stopIDtoColors.containsKey(stopID))
                         {
-                            stopIDs.put(stopName + descName, stopID);
-                            stopToColors.put(stopID, new ArrayList<>());
+                            stopIDtoName.put(stopID, stopName);
+                            stopIDtoColors.put(stopID, new ArrayList<>());
 
                             if(stopName.equals("Sheridan (Loop-bound)") || stopName.equals("Sheridan (Howard-Linden-bound)"))
-                                stopToColors.get(stopID).add("Red");
+                                stopIDtoColors.get(stopID).add("Red");
 
                             if(info.getBoolean("red") == true)
                             {
-                                stopToColors.get(stopID).add("Red");
+                                stopIDtoColors.get(stopID).add("Red");
                             }
                             if(info.getBoolean("blue") == true)
                             {
-                                stopToColors.get(stopID).add("Blue");
+                                stopIDtoColors.get(stopID).add("Blue");
 
 
                             }
                             if(info.getBoolean("g") == true)
                             {
-                                stopToColors.get(stopID).add("Green");
+                                stopIDtoColors.get(stopID).add("Green");
 
 
                             }
                             if(info.getBoolean("brn") == true)
                             {
-                                stopToColors.get(stopID).add("Brown");
+                                stopIDtoColors.get(stopID).add("Brown");
 
 
                             }
                             if(info.getBoolean("p") == true || info.getBoolean("pexp") == true)
                             {
-                                stopToColors.get(stopID).add("Purple");
+                                stopIDtoColors.get(stopID).add("Purple");
 
 
                             }
                             if(info.getBoolean("y") == true)
                             {
-                                stopToColors.get(stopID).add("Yellow");
+                                stopIDtoColors.get(stopID).add("Yellow");
 
 
                             }
                             if(info.getBoolean("pnk") == true)
                             {
-                                stopToColors.get(stopID).add("Pink");
+                                stopIDtoColors.get(stopID).add("Pink");
 
 
                             }
                             if(info.getBoolean("o") == true)
                             {
-                                stopToColors.get(stopID).add("Orange");
+                                stopIDtoColors.get(stopID).add("Orange");
                             }
                         }
 
@@ -192,8 +192,8 @@ public class StopsAPI
  */
                     }
 
-                    Log.d("newData", stationToStops.toString());
-                    Log.d("newData", stopToColors.toString());
+                    Log.d("newData", stationToStopIDs.toString());
+                    Log.d("newData", stopIDtoColors.toString());
 
                     StationsAdapter sa = new StationsAdapter(mainActivity, mainActivity.al);
                     mainActivity.recyclerViewMain.setAdapter(sa);
@@ -220,7 +220,7 @@ public class StopsAPI
     }
 
 
-    public static List <String> getInfo(String stationName) { return stationToStops.get(stationName); }
-    public static ArrayList <String> getStops(String stationName) { return stationToStops.get(stationName); }
+    public static List <String> getInfo(String stationName) { return stationToStopIDs.get(stationName); }
+    public static ArrayList <String> getStops(String stationName) { return stationToStopIDs.get(stationName); }
 
 }

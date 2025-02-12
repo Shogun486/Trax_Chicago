@@ -3,19 +3,14 @@ package com.example.trackcta;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.example.trackcta.NumbersViewAdapter;
 
 public class StopsActivity extends AppCompatActivity
 {
@@ -25,21 +20,38 @@ public class StopsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stops);
+
+
+
+
         Intent intent = getIntent();
         String stationName = intent.getStringExtra("stationName");
-        ArrayList <String> stops = StopsAPI.stationToStops.get(stationName);
+
+        getWindow().getDecorView().setBackgroundColor(Color.BLACK);
+        getSupportActionBar().setTitle(stationName);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+
+        ArrayList <String> stopIDs = StopsAPI.stationToStopIDs.get(stationName);
 
         final ArrayList<NumbersView> arrayList = new ArrayList<NumbersView>();
 
         // display all: belmont(kimball-linden), Arrival
-        int max = 0;
-        for(String station: StopsAPI.stationToStops.keySet())
+
+        //int max = 0;
+        for(String station: StopsAPI.stationToStopIDs.keySet())
         {
-            for(String stop: StopsAPI.stationToStops.get(station))
+            for(String stopID: StopsAPI.stationToStopIDs.get(station))
             {
+                String stop = StopsAPI.stopIDtoName.get(stopID);
                 //max = Math.max(StopsAPI.stopToColors.get(stop).size(), max);
                 int len = station.length();
-                if(stop.contains("H.W. Library"))
+
+
+                if(station.equals("Harlem/Lake"))
+                {
+                    len = 6;
+                }
+                else if(stop.contains("H.W. Library"))
                 {
                     String s = "H.W. Library";
                     len = s.length();
@@ -70,24 +82,36 @@ public class StopsActivity extends AppCompatActivity
 
                 }
                 String display = stop.substring(len, stop.length());
-                Log.d("allStops", station + "---->" + display);
+                String show = "";
+                if(display.contains("branch") || display.contains("Branch")) {
+                    show = display;
+                }
+                else{
+                    show = parseDestinationBound(station, display);
+                }
+
+                Log.d("allStops", station + "---->" + show);
             }
+
         }
 
+
+
+
         //display all
-        for(String stop: stops)
+        for(String ID: stopIDs)
         {
-            String stopID = StopsAPI.stopIDs.get(stop);
+            String stop = StopsAPI.stopIDtoName.get(ID);
             //String bound = parseDestinationBound(stop);
             //Log.d("bound", bound);
 
-            arrayList.add(new NumbersView(R.drawable.train, stop, stopID));
+            arrayList.add(new NumbersView(R.drawable.train, stop, ID));
 
             //Log.d("stopColors", StopsAPI.stopToColors.get(stop).toString());
 
         }
 
-Log.d("colorMax", String.valueOf(max));
+//Log.d("colorMax", String.valueOf(max));
         // create a arraylist of the type NumbersView
 
         // add all the values from 1 to 15 to the arrayList
@@ -134,7 +158,29 @@ Log.d("colorMax", String.valueOf(max));
         numbersListView.setAdapter(numbersArrayAdapter);
     }
 
-    public static String parseDestinationBound(String stop)
+    public String parseDisplay(String display)
+    {
+        String [] arr = display.split("[(].*[)] ");
+        String toReturn = "";
+        for(int i = 0; i < arr.length; i++)
+        {
+            String s = arr[i];
+            if (!s.matches(".*[a-z].*"))
+                continue;
+            toReturn += " ITEM: " + s;
+
+            /*
+            toReturn += s.substring(1, s.length());
+            if(i != arr.length-1)
+                toReturn += "\n";
+                */
+
+        }
+        Log.d("parseDisplay", toReturn);
+        return toReturn;
+    }
+
+    public static String parseDestinationBound(String station, String stop)
     {
         if(stop.equals("Harlem (Forest Pk Branch) (O'Hare-bound)"))
         {//|| stop.equals("Harlem (O'Hare Branch) (O'Hare-bound)")) {
@@ -159,6 +205,30 @@ Log.d("colorMax", String.valueOf(max));
             {
                 return "Outer Loop";
             }
+            /*
+            else if((stop.contains("branch") || stop.contains("Branch")) && (stop.contains("bound") || stop.contains("Bound")))
+            {
+                String [] arr = stop.split("[(]");
+                for(String s: arr)
+                {
+                    String branch = "", dest = "";
+                    Log.d("separate", station + "--->" + s + " " + stop);
+                    if(s.contains("branch") || s.contains("Branch"))
+                    {
+                        branch = "BRANCH: " + s.split(" ")[0];
+                        Log.d("BRANCH", s);
+                        Log.d("BRANCH", branch);
+                    }
+
+                    if(s.contains("bound") || s.contains("Bound"))
+                    {
+                        dest = s.split("-")[0];
+                        Log.d("BOUND", s);
+                        Log.d("BOUND", dest);
+                    }
+                    bound = branch + "\n" + dest;
+                }
+            }*/
             else if(info.contains("bound") || info.contains("Bound"))
             {
                 info = info.substring(0, info.length() - 1);

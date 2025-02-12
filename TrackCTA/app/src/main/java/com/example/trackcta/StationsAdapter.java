@@ -6,13 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -67,15 +64,15 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
 
 
         colors.clear();
-        List<String> stops = StopsAPI.stationToStops.get(stationName);
+        List <String> stopIDs = StopsAPI.stationToStopIDs.get(stationName);
 
 
-        if (StopsAPI.stationToStops != null && StopsAPI.stopToColors != null)
+        if (StopsAPI.stationToStopIDs != null && StopsAPI.stopIDtoColors != null)
         {
             Log.d("INSIDE", "");
-            for (String stop : stops)
+            for (String ID : stopIDs)
             {
-                for (String color : StopsAPI.stopToColors.get(StopsAPI.stopIDs.get(stop))) {
+                for (String color : StopsAPI.stopIDtoColors.get(ID)) {
                     if (!colors.contains(color))
                         colors.add(color);
 
