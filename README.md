@@ -11,7 +11,7 @@ Most train passengers find themselves leaning towards the train tracks to look d
 
 ## What's unique about this app?
 I've noticed on other train-tracking mobile applications that a visualizer is not common, and that they only the show arrival times (not implemented as a countdown whatsoever). 
-This mobile app, in addition to the countdown and visualzier, has a user interface (UI) that mimics design schemes on train platforms. In my [demo], you can see that the color-coding arrangement allows for easy navigation, but also enhances the user experience by making the UI look more like real signs on a platform.
+This mobile app, in addition to the countdown and visualizer, has a user interface (UI) that mimics design schemes on train platforms. In my [demo], you can see that the color-coding arrangement allows for easy navigation, but also enhances the user experience by making the UI look more like real signs on a platform.
 
 ## What's next?
 Since the CTA API team is actually working on creating a live-tracking API of its own, until then I plan on adding more features to this app and making it even better. It's also noteworthy to mention that the current API this app leverages is also in beta-testing phase. In the meantime, if you would like to use this app: 
