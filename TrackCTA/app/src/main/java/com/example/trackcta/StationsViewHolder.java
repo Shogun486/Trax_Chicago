@@ -2,9 +2,14 @@ package com.example.trackcta;
 
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+/*
+
+    ViewHolder for recycler view in StationsActivity
+
+ */
 
 public class StationsViewHolder extends RecyclerView.ViewHolder
 {

@@ -53,7 +53,6 @@ public class ArrivalsAPI
                         run = etaInfo.getInt("rn");
                         runColor = etaInfo.getString("rt");
 
-                        //Org, Blue, G, Brn, Pink, P
                         if(runColor.equals("Org"))
                         {
                             runColor = "Orange";

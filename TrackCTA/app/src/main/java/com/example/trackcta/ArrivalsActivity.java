@@ -2,20 +2,18 @@ package com.example.trackcta;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 /*
-    Shows arrival times for a single stop
+    Shows arrival times for the next hour at a single stop
 */
 
 public class ArrivalsActivity extends AppCompatActivity implements View.OnClickListener
@@ -43,16 +41,16 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         ID= -1;
-        try {
+        try
+        {
             ID = Integer.parseInt(stopID);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e)
+        {
             throw new RuntimeException(e);
         }
-        Log.d("idcheck", String.valueOf(ID));
         if(ID == -1)
             ID = RES;
 
-        //Log.d("stopID", String.valueOf(ID));
         ArrivalsAPI.call(this, ID);
 
         recyclerView = findViewById(R.id.recyclerView);
@@ -79,7 +77,6 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState)
     {
-        Log.d("onSave","");
         outState.putInt("POSITION", ID);
         super.onSaveInstanceState(outState, outPersistentState);
     }
@@ -88,11 +85,7 @@ public class ArrivalsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState)
     {
-        Log.d("onRestore","");
-
         super.onRestoreInstanceState(savedInstanceState);
         RES = savedInstanceState.getInt("POSITION");
     }
-
-
 }

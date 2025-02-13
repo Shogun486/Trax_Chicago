@@ -29,8 +29,6 @@ public class VisualizerActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visualizer_activity);
 
-
-
         imageViewTrain = findViewById(R.id.imageViewTrain);
         textView = findViewById(R.id.textView);
         imageViewS1 = findViewById(R.id.imageViewS1);
@@ -65,9 +63,7 @@ public class VisualizerActivity extends AppCompatActivity
         Log.d("SECONDS", String.valueOf(seconds * 1000));
 
 
-        //test countdown
         seconds *= 1000;
-        // if(seconds < 8) no point in tracking
         int eighth = (seconds) / 8;
         Log.d("eighth", String.valueOf(eighth));
         int countDownInterval = 1000;
@@ -86,37 +82,30 @@ public class VisualizerActivity extends AppCompatActivity
                 if(sum >= eighth * 7)
                 {
                     imageViewS7.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
                 else if(sum >= eighth * 6)
                 {
                     imageViewS6.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
                 else if(sum >= eighth * 5)
                 {
                     imageViewS5.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                  }
                 else if(sum >= eighth * 4)
                 {
                     imageViewS4.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
                 else if(sum >= eighth * 3)
                 {
                     imageViewS3.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
                 else if(sum >= eighth * 2)
                 {
                     imageViewS2.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
                 else if(sum >= eighth * 1)
                 {
                     imageViewS1.setImageResource(R.drawable.check);
-                    //Log.d("EIGHTH", String.valueOf(millisUntilFinished));
                 }
             }
 
@@ -126,8 +115,5 @@ public class VisualizerActivity extends AppCompatActivity
                 textView.setText("Train is due!");
             }
         }.start();
-
-        //convertFromMilitary(currentTime);
-
     }
 }

@@ -3,14 +3,12 @@ package com.example.trackcta;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import java.util.Map;
 
 /*
     Allows user to select station, which will then start
-    up a new activity to filter a specific platform/stop at the location
+    up a new activity to filter a specific platform/stop
 */
 
 public class StationsActivity extends AppCompatActivity
@@ -42,7 +40,6 @@ public class StationsActivity extends AppCompatActivity
         setContentView(R.layout.activity_stations);
 
         Intent intent = getIntent();
-
         getWindow().getDecorView().setBackgroundColor(Color.BLACK);
         getSupportActionBar().setTitle("Which station are you using today?");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
@@ -56,14 +53,8 @@ public class StationsActivity extends AppCompatActivity
         recyclerViewMain.setAdapter(sa);
 
         StopsAPI.stationToStopIDs.clear();
-
-
-        // API calls
         StopsAPI sapi = new StopsAPI();
         sapi.call(this);
-        //LocationsAPI.call(this);
-
-
     }
 
 
@@ -72,31 +63,16 @@ public class StationsActivity extends AppCompatActivity
         String stationName = al.get(recyclerViewMain.getChildLayoutPosition(view));
         Log.d("checking", stationName);
 
-
-        int stopID = -1; // default value
         stops.clear();
         stopColors.clear();
         ids.clear();
-/*
-        for(String stop: StopsAPI.stationToStops.get(stationName))
-        {
-            // Separate ID numbers and stop_names into different Lists
-            try
-            {
-            }
-            catch (NumberFormatException e)
-            {
-                //stopColors.put(info, StopsAPI.get);
-            }
-        }
-*/
+
         Intent intent = new Intent(this, StopsActivity.class);
         intent.putExtra("stationName", stationName);
         startActivity(intent);
     }
 
 
-    // Helper functions for time-related displays or calculations
     public static void convertFromMilitary(String time)
     {
         int h1 = (int) time.charAt(0) - '0', h2 = (int) time.charAt(1)- '0', hour = h1 * 10 + h2;
@@ -121,6 +97,7 @@ public class StationsActivity extends AppCompatActivity
         display.append(meridiem);
         Log.d("currentCST", display.toString());
     }
+
 
     public static String getTimeDifference(String now, String future)
     {
@@ -198,11 +175,4 @@ public class StationsActivity extends AppCompatActivity
     }
 
     public static boolean hourWait() { return differenceInHours == 1; }
-
-
-    public static ArrayList <String> getStops(String stationName) { return new ArrayList<>(StopsAPI.getStops(stationName)); }
-
-
-    public static int getID(int index) { return ids.get(index); }
-
 }

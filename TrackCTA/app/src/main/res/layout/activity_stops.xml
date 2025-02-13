@@ -10,7 +10,7 @@
         android:id="@+id/stopsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="0dp"
         android:background="#545454"
         android:backgroundTint="#545454"
         android:divider="@color/white"

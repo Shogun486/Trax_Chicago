@@ -6,32 +6,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 /*
-    Adapter for RecyclerView in MainActivity
+    Adapter for RecyclerView in StationsActivity
  */
 
 public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
 
 {
-    private StationsActivity mainActivity;
-    //private StationsInfo info;
+    private StationsActivity stationsActivity;
     private List<String> al;
     private Set <String> colors = new HashSet<>();
 
 
-
-    StationsAdapter(StationsActivity mainActivity, List <String> al)
+    StationsAdapter(StationsActivity stationsActivity, List <String> al)
     {
-        this.mainActivity = mainActivity;
+        this.stationsActivity = stationsActivity;
         this.al = al;
     }
 
@@ -39,15 +35,14 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
     @Override
     public StationsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        // Recognize the entries to populate
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.stations_entry, parent, false);
         return new StationsViewHolder(itemView);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull StationsViewHolder holder, int position) {
-        //info = al.get(position);
+    public void onBindViewHolder(@NonNull StationsViewHolder holder, int position)
+    {
         String stationName = al.get(position);
         String display = stationName;
 
@@ -62,10 +57,8 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
         holder.textViewLineColor5.setVisibility(View.GONE);
         holder.textViewLineColor6.setVisibility(View.GONE);
 
-
         colors.clear();
         List <String> stopIDs = StopsAPI.stationToStopIDs.get(stationName);
-
 
         if (StopsAPI.stationToStopIDs != null && StopsAPI.stopIDtoColors != null)
         {
@@ -75,41 +68,46 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsViewHolder>
                 for (String color : StopsAPI.stopIDtoColors.get(ID)) {
                     if (!colors.contains(color))
                         colors.add(color);
-
                 }
             }
 
             ArrayList<String> temp = new ArrayList<>(colors);
             GradientDrawable gd;
-            for (int i = 0; i < temp.size(); i++) {
+            for (int i = 0; i < temp.size(); i++)
+            {
                 String color = temp.get(i);
-                if (i == 0) {
+                if (i == 0)
+                {
                     holder.textViewLineColor1.setVisibility(View.VISIBLE);
                     gd = (GradientDrawable) holder.textViewLineColor1.getBackground().mutate();
                     gd.setColor(getColorInt(color));
-                } else if (i == 1) {
+                } else if (i == 1)
+                {
                     holder.textViewLineColor2.setVisibility(View.VISIBLE);
                     gd = (GradientDrawable) holder.textViewLineColor2.getBackground().mutate();
                     gd.setColor(getColorInt(color));
-                } else if (i == 2) {
+                } else if (i == 2)
+                {
                     holder.textViewLineColor3.setVisibility(View.VISIBLE);
                     gd = (GradientDrawable) holder.textViewLineColor3.getBackground().mutate();
                     gd.setColor(getColorInt(color));
-                } else if (i == 3) {
+                } else if (i == 3)
+                {
                     holder.textViewLineColor4.setVisibility(View.VISIBLE);
                     gd = (GradientDrawable) holder.textViewLineColor4.getBackground().mutate();
                     gd.setColor(getColorInt(color));
-                } else if (i == 4) {
+                } else if (i == 4)
+                {
                     holder.textViewLineColor5.setVisibility(View.VISIBLE);
                     gd = (GradientDrawable) holder.textViewLineColor5.getBackground().mutate();
                     gd.setColor(getColorInt(color));
-                } else if (i == 5) {
+                } else if (i == 5)
+                {
                     holder.textViewLineColor6.setVisibility(View.VISIBLE);
                     gd = (GradientDrawable) holder.textViewLineColor6.getBackground().mutate();
                     gd.setColor(getColorInt(color));
                 }
             }
-            Log.d("lineColors", StopsAPI.lineColors.get(stationName).toString());
         }
     }
 

@@ -2,9 +2,14 @@ package com.example.trackcta;
 
 import androidx.annotation.NonNull;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+/*
+
+    ViewHolder for recycler view in ArrivalsActivity
+
+ */
 
 public class ArrivalsViewHolder extends RecyclerView.ViewHolder
 {

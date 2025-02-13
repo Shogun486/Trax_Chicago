@@ -2,6 +2,12 @@ package com.example.trackcta;
 
 import java.io.Serializable;
 
+/*
+
+    This class contains information that will be displayed in ArrivalsActivity
+
+*/
+
 public class ArrivalsInfo implements Serializable
 {
     private String arrivalTime;
@@ -22,7 +28,5 @@ public class ArrivalsInfo implements Serializable
 
     public int getRun() { return run; }
 
-    public String getRunColor() {
-        return runColor;
-    }
+    public String getRunColor() { return runColor; }
 }

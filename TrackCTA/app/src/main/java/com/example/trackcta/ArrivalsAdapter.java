@@ -2,17 +2,11 @@ package com.example.trackcta;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 /*
@@ -53,7 +47,7 @@ public class ArrivalsAdapter extends RecyclerView.Adapter<ArrivalsViewHolder>
         String runDisplay = "RUN# ";
         int run = info.getRun();
         runDisplay += run;
-        holder.textViewRunNumber.setText(runDisplay);
+        holder.textViewRunNumber.setText(runDisplay + " ");
 
         String minutesDisplay = "";
         String currentTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
