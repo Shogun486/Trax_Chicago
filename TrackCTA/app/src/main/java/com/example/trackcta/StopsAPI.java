@@ -40,6 +40,7 @@ public class StopsAPI
         //stationInfo.clear();
         //stationToStops.clear();
 
+
         this.mainActivity = mainActivity;
         queue = Volley.newRequestQueue(this.mainActivity);
 
@@ -48,6 +49,7 @@ public class StopsAPI
             @Override
             public void onResponse(JSONArray response)
             {
+
                 try
                 {
                     JSONArray arr = new JSONArray(response.toString());

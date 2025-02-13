@@ -30,9 +30,9 @@ public class StationsActivity extends AppCompatActivity
     private static Map<String, String> stopColors = new HashMap<>();
     public static List <Integer> ids = new ArrayList<>();
     private static int differenceInHours, differenceInMinutes, differenceInSeconds;
-    protected RecyclerView recyclerViewMain;
+    protected static RecyclerView recyclerViewMain;
     protected static ArrayList<String> al = new ArrayList<>();
-    private StationsAdapter sa;
+    protected static StationsAdapter sa;
 
 
     @Override
@@ -48,17 +48,22 @@ public class StationsActivity extends AppCompatActivity
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         stops.clear();
-        stopColors.clear();;
+        stopColors.clear();
+
+        recyclerViewMain = findViewById(R.id.recyclerViewMain);
+        recyclerViewMain.setLayoutManager(new LinearLayoutManager(this));
+        sa = new StationsAdapter(this, al);
+        recyclerViewMain.setAdapter(sa);
+
+        StopsAPI.stationToStopIDs.clear();
+
 
         // API calls
         StopsAPI sapi = new StopsAPI();
         sapi.call(this);
         //LocationsAPI.call(this);
 
-        recyclerViewMain = findViewById(R.id.recyclerViewMain);
-        recyclerViewMain.setLayoutManager(new LinearLayoutManager(this));
-        sa = new StationsAdapter(this, al);
-        recyclerViewMain.setAdapter(sa);
+
     }
 
 
